@@ -189,15 +189,15 @@ public class MainActivity extends AppCompatActivity {
             // SE A HORA FORA MAIOR QUE 11:45
             if(hora.getDoubleHora()>11.45){
 
-                devendo.setHora(hora);
-                devendo.subHoraMinuto(11,45);
+                devendo.setHora(hora);// DEVENDO VAI SER IGUAL A HORA MENOS 11:45
+                devendo.subHoraMinuto(11,45);// SUBTRAINDO 11:45 DAS HORAS TRABALHADAS
 
                 fechamento.subtrair(devendo); //Fechamento menos o valor que está devendo
 
                 //SOMA A HORA 1 COM A Hora 2
-                hr_hora1.setHora(devendo);
-                hora1_Et.setText(hr_hora1.toHoras());
-                somar();// Hora 1 + hora 2
+                hr_hora1.setHora(devendo);// SETANDO A QUANTIDADE DA HORA QUE ESTÁ DEVENDO NA HORA 1
+                hora1_Et.setText(hr_hora1.toHoras());// SETANDO A HORA 1 NO CAMPO
+                somar();//SOMANDO Hora 1 + hora 2
 
             }else{
                 devendo.setHora("00:00");
