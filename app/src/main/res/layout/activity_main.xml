@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context=".MainActivity"
+    android:background="@drawable/background"
+    >
+
+    <androidx.core.widget.NestedScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="60dp"
+            >
+
+            <TextView
+                android:id="@+id/entradaTv"
+                style="@style/text"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="30dp"
+                android:text="Entrada"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/entradaEt"
+                style="@style/hora"
+                app:layout_constraintLeft_toLeftOf="@+id/entradaTv"
+                app:layout_constraintTop_toBottomOf="@+id/entradaTv" />
+
+            <TextView
+                android:id="@+id/saidaTv"
+                style="@style/text"
+                android:text="Saída"
+                app:layout_constraintBaseline_toBaselineOf="@+id/entradaTv"
+                app:layout_constraintLeft_toRightOf="@+id/entradaEt" />
+
+            <EditText
+                android:id="@+id/saidaEt"
+                style="@style/hora"
+                app:layout_constraintBaseline_toBaselineOf="@+id/entradaEt"
+                app:layout_constraintLeft_toLeftOf="@+id/saidaTv"
+                app:layout_constraintLeft_toRightOf="@+id/entradaEt" />
+
+            <TextView
+                android:id="@+id/tempoTv"
+                style="@style/text"
+                android:text="Tempo"
+                app:layout_constraintBaseline_toBaselineOf="@+id/saidaTv"
+                app:layout_constraintLeft_toRightOf="@+id/saidaEt" />
+
+            <EditText
+                android:id="@+id/tempoEt"
+                style="@style/hora"
+                app:layout_constraintLeft_toLeftOf="@+id/tempoTv"
+                app:layout_constraintTop_toBottomOf="@+id/tempoTv" />
+
+            <TextView
+                android:id="@+id/horaTv"
+                style="@style/text"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="20dp"
+                android:text="Horas"
+                app:layout_constraintLeft_toLeftOf="@id/entradaTv"
+                app:layout_constraintTop_toBottomOf="@+id/entradaEt" />
+
+            <EditText
+                android:id="@+id/horaEt"
+                style="@style/hora"
+                android:focusable="false"
+                android:text="00:00"
+                app:layout_constraintLeft_toLeftOf="@+id/horaTv"
+                app:layout_constraintTop_toBottomOf="@+id/horaTv" />
+
+            <TextView
+                android:id="@+id/devendoTv"
+                style="@style/text"
+                android:layout_marginLeft="30dp"
+                android:text="Devendo"
+                app:layout_constraintBaseline_toBaselineOf="@+id/horaTv"
+                app:layout_constraintLeft_toRightOf="@+id/horaEt" />
+
+            <EditText
+                android:id="@+id/devendoEt"
+                style="@style/hora"
+                android:focusable="false"
+                android:text="00:00"
+                app:layout_constraintBaseline_toBaselineOf="@+id/horaEt"
+                app:layout_constraintLeft_toLeftOf="@+id/devendoTv" />
+
+            <TextView
+                android:id="@+id/fechamentoTv"
+                style="@style/text"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="Fechamento"
+                app:layout_constraintBaseline_toBaselineOf="@+id/horaTv"
+                app:layout_constraintLeft_toRightOf="@+id/devendoEt" />
+
+            <EditText
+                android:id="@+id/fechamentoEt"
+                style="@style/hora"
+                android:focusable="false"
+                android:text="00:00"
+                android:textIsSelectable="false"
+                app:layout_constraintBaseline_toBaselineOf="@+id/horaEt"
+                app:layout_constraintLeft_toLeftOf="@+id/fechamentoTv" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="30dp"
+                android:background="@color/laranja_1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/horaEt" />
+
+            <TextView
+                android:id="@+id/tv_hora_01"
+                style="@style/text"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Hora 1"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="@+id/view"
+                app:layout_constraintTop_toTopOf="@+id/view" />
+
+            <EditText
+                android:id="@+id/et_hora_01"
+                style="@style/hora"
+                app:layout_constraintStart_toStartOf="@+id/tv_hora_01"
+                app:layout_constraintTop_toBottomOf="@+id/tv_hora_01" />
+
+            <TextView
+                android:id="@+id/sinal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="+"
+                android:textSize="36dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                app:layout_constraintBaseline_toBaselineOf="@+id/et_hora_01"
+                app:layout_constraintLeft_toRightOf="@+id/et_hora_01" />
+
+            <TextView
+                android:id="@+id/tv_hora_02"
+                style="@style/text"
+                android:layout_marginLeft="10dp"
+                android:text="Hora 2"
+                android:textColor="@color/white"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tv_hora_01"
+                app:layout_constraintLeft_toRightOf="@+id/sinal" />
+
+            <EditText
+                android:id="@+id/et_hora_02"
+                style="@style/hora"
+                app:layout_constraintLeft_toLeftOf="@+id/tv_hora_02"
+                app:layout_constraintTop_toBottomOf="@+id/tv_hora_01" />
+
+            <TextView
+                android:id="@+id/tv_sinal_igual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="="
+                android:textSize="36dp"
+                android:textColor="@color/white"
+                app:layout_constraintBaseline_toBaselineOf="@+id/et_hora_02"
+                app:layout_constraintLeft_toRightOf="@+id/et_hora_02" />
+
+            <TextView
+                android:id="@+id/tv_hora_03"
+                style="@style/text"
+                android:layout_marginLeft="10dp"
+                android:text="TOTAL"
+                android:textColor="@color/white"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tv_hora_01"
+                app:layout_constraintLeft_toRightOf="@+id/tv_sinal_igual" />
+
+            <EditText
+                android:id="@+id/et_hora_03"
+                style="@style/hora"
+                android:focusable="false"
+                android:text="00:00"
+                app:layout_constraintLeft_toLeftOf="@+id/tv_hora_03"
+                app:layout_constraintTop_toBottomOf="@+id/tv_hora_03" />
+
+            <Button
+                android:id="@+id/limparBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/button_limpar"
+                android:text="Limpar"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:background="@color/marrom"
+        android:id="@+id/desenvolvido"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:text="Desenvolvido por ElderBR"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
