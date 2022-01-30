@@ -1,117 +1,85 @@
 package br.com.elderbr.android.quantashoras;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class MainActivity extends AppCompatActivity {
 
 
-    Hora entrada = new Hora();
-    Hora saida = new Hora();
-    Hora tempo = new Hora();
-    Hora hora = new Hora();
-    Hora devendo = new Hora();
-    Hora fechamento = new Hora();
-    Hora hr_hora1 = new Hora();
-    Hora hr_hora2 = new Hora();
-    Hora hr_total = new Hora();
-    String hora1, hora2, total;
+    private Hora hr_entrada = new Hora(0, 0);
+    private Hora hr_saida = new Hora(0, 0);
+    private Hora hr_tempo = new Hora(0, 0);
+    private Hora hr_hora = new Hora(0, 0);
+    private Hora hr_devendo = new Hora(0, 0);
+    private Hora hr_fechamento = new Hora(0, 0);
+
+    // Horas Extra para Casa
+    private Hora hr_hora1 = new Hora(0, 0);
+    private Hora hr_hora2 = new Hora(0, 0);
+    private Hora hr_total = new Hora(0, 0);
+
+    // HORAS NA CASA
+    private Hora hr_casa = new Hora(0, 0);
+    private Hora hr_usada = new Hora(0, 0);
+    private Hora hr_casaRestante = new Hora(0, 0);
 
 
-    EditText entradaEt, saidaEt, tempoEt, horaEt, devendoEt, fechamentoEt,hora1_Et,hora2_Et,totalEt;
+    private String entrada, saida, tempo, hora1, hora2, casa, usada, restante, total;
 
-    Button limparBtn;
+
+    private EditText entradaEt, saidaEt, tempoEt, horaEt, devendoEt, fechamentoEt, hora1_Et, hora2_Et, totalEt, casaHoraEt, casaUsadaEt, casaRestanteEt;
+
+    private Button limparBtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        entradaEt = (EditText) findViewById(R.id.entradaEt);
-        saidaEt = (EditText) findViewById(R.id.saidaEt);
-        tempoEt = (EditText) findViewById(R.id.tempoEt);
-        horaEt = (EditText) findViewById(R.id.horaEt);
-        devendoEt = findViewById(R.id.devendoEt);
-        fechamentoEt = findViewById(R.id.fechamentoEt);
-        limparBtn = (Button) findViewById(R.id.limparBtn);
+        instanciando();
 
-        hora1_Et = findViewById(R.id.et_hora_01);
-        hora2_Et = findViewById(R.id.et_hora_02);
-        totalEt = findViewById(R.id.et_hora_03);
-
-        // Entrada
         entradaEt.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if(entradaEt.getText().length()>3){
-                    if(entradaEt.getText().toString().length()>3){
-                        entrada.setHora(entradaEt.getText().toString());
-                    }
+                hr_entrada = new Hora(0, 0);
+                entrada = entradaEt.getText().toString().trim();
+                if (entrada.length() > 3 && entrada.contains(":")) {
+                    hr_entrada.parse(entrada);
                 }
-                horasTrab();
+                horaTrabalhada();
                 return false;
             }
         });
 
-        // Ao sair do campo entrada calcula
-        entradaEt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus==false){
-                    if(entradaEt.getText().toString().length()>3){
-                        entrada.setHora(entradaEt.getText().toString());
-                        horasTrab();
-                    }
-                }
-            }
-        });
-
-        // Saída
-        saidaEt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus==false && saidaEt.getText().toString().length()>3){
-                    saida.setHora(saidaEt.getText().toString());
-                    horasTrab();
-                }
-            }
-        });
         saidaEt.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if(saidaEt.getText().toString().length()>3){
-                    saida.setHora(saidaEt.getText().toString());
+                hr_saida = new Hora(0, 0);
+                saida = saidaEt.getText().toString().trim();
+                if (saida.length() > 3 && saida.contains(":")) {
+                    hr_saida.parse(saida);
                 }
-                horasTrab();
+                horaTrabalhada();
                 return false;
             }
         });
 
-        // TEMPO
-        tempoEt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus==false && tempoEt.getText().toString().length()>3){
-                    tempo.setHora(tempoEt.getText().toString());
-                    horasTrab();
-                }
-            }
-        });
         tempoEt.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if(tempoEt.getText().toString().length()==0||tempoEt.getText().toString().length()>3){
-                    tempo.setHora(tempoEt.getText().toString());
-                    horasTrab();
+                tempo = tempoEt.getText().toString().trim();
+                if (tempo.length() > 3 && tempo.contains(":")) {
+                    hr_tempo.parse(tempo);
+                } else {
+                    hr_tempo.setHora(0, 0);
                 }
+                horaTrabalhada();
                 return false;
             }
         });
@@ -119,22 +87,13 @@ public class MainActivity extends AppCompatActivity {
         hora1_Et.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                hora1 = hora1_Et.getText().toString();
-                hora2 = hora2_Et.getText().toString();
-
-                if(hora1.contains(":") && hora1.length() > 3 && hora2.contains(":") && hora2.length() > 3){
-
+                hora1 = hora1_Et.getText().toString().trim();
+                if (hora1.length() > 3 && hora1.contains(":")) {
                     hr_hora1.parse(hora1);
-                    hr_hora2.parse(hora2);
-
-                    hr_total.setHora("00:00");
-                    hr_total.somar(hr_hora1);
-                    hr_total.somar(hr_hora2);
-                    totalEt.setText(hr_total.toHoras());
-
-                }else{
-                    totalEt.setText("00:00");
+                } else {
+                    hr_hora1.setHora(0, 0);
                 }
+                somaHoras();
                 return false;
             }
         });
@@ -142,7 +101,22 @@ public class MainActivity extends AppCompatActivity {
         hora2_Et.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                somar();
+                hora2 = hora2_Et.getText().toString().trim();
+                if (hora2.length() > 3 && hora2.contains(":")) {
+                    hr_hora2.parse(hora2);
+                } else {
+                    hr_hora2.setHora(0, 0);
+                }
+                somaHoras();
+                return false;
+            }
+        });
+
+        casaHoraEt.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                casa = casaHoraEt.getText().toString().trim();
+                horaTrabalhada();
                 return false;
             }
         });
@@ -150,87 +124,180 @@ public class MainActivity extends AppCompatActivity {
         limparBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                entradaEt.setText("");
-                saidaEt.setText("");
-                horaEt.setText("00:00");
-                devendoEt.setText("00:00");
-                fechamentoEt.setText("00:00");
-                hora1_Et.setText("");
-                hora2_Et.setText("");
-                totalEt.setText("00:00");
+                instanciando();
                 entradaEt.requestFocus();
+
             }
         });
+
     }
 
-    private void horasTrab(){
+    private void horaTrabalhada() {
 
-        if(entradaEt.getText().toString().length()>3&&saidaEt.getText().toString().length()>3){
+        // INSTANCIANDO HORAS
+        hr_hora = new Hora(0, 0);
+        hr_fechamento = new Hora(0, 0);
+        hr_devendo = new Hora(0, 0);
 
-            entrada.setHora(entradaEt.getText().toString());
-            saida.setHora(saidaEt.getText().toString());
+        //HORA NA CASA
+        hr_casa = new Hora(0, 0);
+        hr_usada = new Hora(0, 0);
+        hr_casaRestante = new Hora(0, 0);
 
-            // SETA A HORA TRABALHADA E FECHAMENTO
-            hora.setHora(saida);
-            fechamento.setHora(saida);
-
-            // SE NO CAMPO TEMPO ESTIVER PREENCHIDO
-            if(tempoEt.getText().toString().length()>3){
-                tempo.setHora(tempoEt.getText().toString());// PEGA A HORA DO TEMPO
-            }else{
-                tempo.setHora("00:00");
-            }
-
-            hora.somar(tempo);// SOMA A HORA TRABALHADA MAIS O TEMPO
-            fechamento.somar(tempo);// SOMA A HORA TRABALHADA MAIS O TEMPO
-
-            hora.subtrair(entrada);// FAZ O CALCULO DA SAIDA MAIS O TEMPO MENOS E ENTRADA
-
-            // SE A HORA FORA MAIOR QUE 11:45
-            if(hora.getDoubleHora()>11.45){
-
-                devendo.setHora(hora);// DEVENDO VAI SER IGUAL A HORA MENOS 11:45
-                devendo.subHoraMinuto(11,45);// SUBTRAINDO 11:45 DAS HORAS TRABALHADAS
-
-                fechamento.subtrair(devendo); //Fechamento menos o valor que está devendo
-
-                //SOMA A HORA 1 COM A Hora 2
-                hr_hora1.setHora(devendo);// SETANDO A QUANTIDADE DA HORA QUE ESTÁ DEVENDO NA HORA 1
-                hora1_Et.setText(hr_hora1.toHoras());// SETANDO A HORA 1 NO CAMPO
-                somar();//SOMANDO Hora 1 + hora 2
-
-            }else{
-                devendo.setHora("00:00");
-            }
-        }else{
-            hora.setHora("00:00");
-            fechamento.setHora("00:00");
-            devendo.setHora("00:00");
+        // VALIDANDO A HORA DA CASA
+        if (casa != null && casa.length() > 3 && casa.contains(":")) {
+            hr_casa.parse(casa);
         }
 
-        horaEt.setText(hora.toHoras());
-        devendoEt.setText(devendo.toHoras());
-        fechamentoEt.setText(fechamento.toHoras());
+        // VERIFICA SE A ENTRADA E A SAÍDA CONTEM HORA VALIDA
+        if (entrada != null && entrada.length() > 3 && saida != null && saida.length() > 3) {
 
-    }
+            // HORA É IGUAL A SAÍDA MAIS O TEMPO MENOS A ENTRADA
+            hr_hora.setHora(hr_saida);
+            hr_hora.somar(hr_tempo);
+            hr_hora.somar(hr_casa);
 
-    private void somar(){
-        hora1 = hora1_Et.getText().toString();
-        hora2 = hora2_Et.getText().toString();
+            // QUANTIDADE DE HORA É IGUAL A SAÍDA MENOS A ENTRADA
+            hr_hora.subtrair(hr_entrada);
 
-        if(hora1.contains(":") && hora1.length() > 3 && hora2.contains(":") && hora2.length() > 3){
+            // HORA DO FECHAMENTO É IGUAL A PARADA MAIS O TEMPO
+            hr_fechamento.setHora(hr_saida);// FECHAMENTO É IGUAL A SAÍDA
+            hr_fechamento.somar(hr_tempo);// SOMANDO COM TEMPO
+            hr_fechamento.somar(hr_casa);// SOMANDO COM A HORA DA CASA
 
-            hr_hora1.parse(hora1);
-            hr_hora2.parse(hora2);
+            if (hr_hora.getDoubleHora() > 11.45) {// SE A HORA TRABALHADA FOR MAIOR QUE 11:45
 
-            hr_total.setHora("00:00");
-            hr_total.somar(hr_hora1);
-            hr_total.somar(hr_hora2);
-            totalEt.setText(hr_total.toHoras());
+                // DEVENDO É IGUAL A HORA MENOS 11:45
+                hr_devendo.setHora(hr_hora);
+                hr_devendo.subtrair(11, 45);
 
-        }else{
+            } else {
+                hr_devendo.setHora(0, 0);
+            }
+            hr_fechamento.subtrair(hr_devendo);// FECHAMENTO MENOS A HORA QUE ESTA DEVENDO
+
+            // IMPRIMINDO NAS EDITTEXT
+            horaEt.setText(hr_hora.toHoras());
+            devendoEt.setText(hr_devendo.toHoras());
+            fechamentoEt.setText(hr_fechamento.toHoras());
+            hora1_Et.setText(hr_devendo.toHoras());
+
+            // HORAS EXTRAS
+            hora1_Et.setText(hr_devendo.toHoras());
+
+        } else {
+            horaEt.setText("00:00");
+            devendoEt.setText("00:00");
             totalEt.setText("00:00");
         }
+
+        // HORA NA CASA É O VALOR DA HORA NA CASA MENOS A HORA DEVENDO SOBRA O RESTANTE DE HORAS NA CASA
+        if (hr_casa.getDoubleHora() > 0) {
+
+            hr_usada.setHora(hr_casa);
+            hr_usada.subtrair(hr_devendo);
+
+            hr_casaRestante.setHora(hr_casa);
+            hr_casaRestante.subtrair(hr_usada);
+        }
+
+        casaUsadaEt.setText(hr_usada.toHoras());
+        casaRestanteEt.setText(hr_casaRestante.toHoras());
+
+        somaHoras();
+    }
+
+    /***
+     * SOMA AS HORAS NA CASA
+     * HORA QUE JÁ TEM MAIS A HORA DO DIA
+     */
+    private void somaHoras() {
+
+        hr_hora1 = new Hora(0, 0);
+        hr_hora2 = new Hora(0, 0);
+        hr_total = new Hora(0, 0);
+
+        if (hr_devendo.getDoubleHora() > 0) {
+            hora1_Et.setText(hr_devendo.toHoras());
+        } else {
+            hora1_Et.setText("");
+        }
+
+        hora1 = hora1_Et.getText().toString().trim();
+        hora2 = hora2_Et.getText().toString().trim();
+
+        hr_total.setHora(0, 0);
+
+        if (hora1.length() > 3 && hora1.contains(":") && hora2.length() > 3 && hora2.contains(":")) {
+            hr_hora1.setHora(hora1);
+            hr_hora2.setHora(hora2);
+
+            hr_total.somar(hr_hora1);
+            hr_total.somar(hr_hora2);
+        }
+        totalEt.setText(hr_total.toHoras());
+    }
+
+    private void instanciando() {
+
+        entradaEt = (EditText) findViewById(R.id.entradaEt);
+        entrada = null;
+        saidaEt = (EditText) findViewById(R.id.saidaEt);
+        saida = null;
+        tempoEt = (EditText) findViewById(R.id.tempoEt);
+        tempo = null;
+        horaEt = (EditText) findViewById(R.id.horaEt);
+        devendoEt = findViewById(R.id.devendoEt);
+        fechamentoEt = findViewById(R.id.fechamentoEt);
+        limparBtn = (Button) findViewById(R.id.limparBtn);
+
+        // HORAS EXTRAS
+        hora1_Et = findViewById(R.id.et_hora_01);
+        hora1 = null;
+        hora2_Et = findViewById(R.id.et_hora_02);
+        hora2 = null;
+        totalEt = findViewById(R.id.et_hora_03);
+
+        // HORAS NA CASA
+        casaHoraEt = findViewById(R.id.etHoraCasa);
+        casa = null;
+        casaUsadaEt = findViewById(R.id.etHoraCasaUsada);
+        casaRestanteEt = findViewById(R.id.etHoraCasaRestante);
+
+        // HORAS TRABALHADAS
+        hr_entrada = new Hora(0, 0);
+        hr_saida = new Hora(0, 0);
+        hr_hora = new Hora(0, 0);
+        hr_tempo = new Hora(0, 0);
+        hr_fechamento = new Hora(0, 0);
+        hr_devendo = new Hora(0, 0);
+
+        //EXTRA NA CASA
+        hr_hora1 = new Hora(0, 0);
+        hr_hora2 = new Hora(0, 0);
+        hr_total = new Hora(0, 0);
+
+        //HORA NA CASA
+        hr_casa = new Hora(0, 0);
+        hr_usada = new Hora(0, 0);
+        hr_casaRestante = new Hora(0, 0);
+        casa = null;
+
+        entradaEt.setText("");
+        saidaEt.setText("");
+        tempoEt.setText("");
+        horaEt.setText("00:00");
+        devendoEt.setText("00:00");
+        fechamentoEt.setText("00:00");
+
+        hora1_Et.setText("");
+        hora2_Et.setText("");
+        totalEt.setText("00:00");
+
+        casaHoraEt.setText("");
+        casaUsadaEt.setText("00:00");
+        casaRestanteEt.setText("00:00");
+
     }
 
 }

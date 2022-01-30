@@ -12,9 +12,6 @@
     >
 
     <androidx.core.widget.NestedScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
@@ -33,9 +30,10 @@
                 style="@style/text"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="30dp"
-                android:text="Entrada"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="Entrada"
+                />
 
             <EditText
                 android:id="@+id/entradaEt"
@@ -93,7 +91,8 @@
                 android:layout_marginLeft="30dp"
                 android:text="Devendo"
                 app:layout_constraintBaseline_toBaselineOf="@+id/horaTv"
-                app:layout_constraintLeft_toRightOf="@+id/horaEt" />
+                app:layout_constraintLeft_toRightOf="@+id/horaEt"
+                />
 
             <EditText
                 android:id="@+id/devendoEt"
@@ -121,86 +120,12 @@
                 app:layout_constraintBaseline_toBaselineOf="@+id/horaEt"
                 app:layout_constraintLeft_toLeftOf="@+id/fechamentoTv" />
 
-            <View
-                android:id="@+id/view"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginTop="30dp"
-                android:background="@color/laranja_1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/horaEt" />
 
-            <TextView
-                android:id="@+id/tv_hora_01"
-                style="@style/text"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:text="Hora 1"
-                android:textColor="@color/white"
-                app:layout_constraintStart_toStartOf="@+id/view"
-                app:layout_constraintTop_toTopOf="@+id/view" />
+            <include
+                layout="@layout/layout_hora_extra"
+                 />
 
-            <EditText
-                android:id="@+id/et_hora_01"
-                style="@style/hora"
-                app:layout_constraintStart_toStartOf="@+id/tv_hora_01"
-                app:layout_constraintTop_toBottomOf="@+id/tv_hora_01" />
-
-            <TextView
-                android:id="@+id/sinal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="+"
-                android:textSize="36dp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                app:layout_constraintBaseline_toBaselineOf="@+id/et_hora_01"
-                app:layout_constraintLeft_toRightOf="@+id/et_hora_01" />
-
-            <TextView
-                android:id="@+id/tv_hora_02"
-                style="@style/text"
-                android:layout_marginLeft="10dp"
-                android:text="Hora 2"
-                android:textColor="@color/white"
-                app:layout_constraintBaseline_toBaselineOf="@+id/tv_hora_01"
-                app:layout_constraintLeft_toRightOf="@+id/sinal" />
-
-            <EditText
-                android:id="@+id/et_hora_02"
-                style="@style/hora"
-                app:layout_constraintLeft_toLeftOf="@+id/tv_hora_02"
-                app:layout_constraintTop_toBottomOf="@+id/tv_hora_01" />
-
-            <TextView
-                android:id="@+id/tv_sinal_igual"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="="
-                android:textSize="36dp"
-                android:textColor="@color/white"
-                app:layout_constraintBaseline_toBaselineOf="@+id/et_hora_02"
-                app:layout_constraintLeft_toRightOf="@+id/et_hora_02" />
-
-            <TextView
-                android:id="@+id/tv_hora_03"
-                style="@style/text"
-                android:layout_marginLeft="10dp"
-                android:text="TOTAL"
-                android:textColor="@color/white"
-                app:layout_constraintBaseline_toBaselineOf="@+id/tv_hora_01"
-                app:layout_constraintLeft_toRightOf="@+id/tv_sinal_igual" />
-
-            <EditText
-                android:id="@+id/et_hora_03"
-                style="@style/hora"
-                android:focusable="false"
-                android:text="00:00"
-                app:layout_constraintLeft_toLeftOf="@+id/tv_hora_03"
-                app:layout_constraintTop_toBottomOf="@+id/tv_hora_03" />
+            <include layout="@layout/hora_casa_layout" />
 
             <Button
                 android:id="@+id/limparBtn"
@@ -209,14 +134,11 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/button_limpar"
                 android:text="Limpar"
+                android:textColor="@color/white"
                 android:textSize="14dp"
                 android:textStyle="bold"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="20dp"
-                />
+                app:layout_constraintTop_toBottomOf="@+id/layout_hora_casa"
+                app:layout_constraintEnd_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
