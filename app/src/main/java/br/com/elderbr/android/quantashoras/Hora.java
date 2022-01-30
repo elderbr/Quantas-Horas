@@ -12,10 +12,24 @@ public class Hora{
     SimpleDateFormat format = new SimpleDateFormat("HH:mm");
 
     public Hora() {
+        data = Calendar.getInstance(new Locale("pt","BR"));
         data.set(Calendar.DAY_OF_YEAR, 1);
     }
 
+    public Hora(int hora, int minutos) {
+        data = Calendar.getInstance(new Locale("pt","BR"));
+        data.set(Calendar.DAY_OF_YEAR, 1);
+        data.set(Calendar.HOUR_OF_DAY, hora);
+        data.set(Calendar.MINUTE, minutos);
+    }
+
     public Hora setHora(int hora){
+        data.set(Calendar.HOUR_OF_DAY, hora);
+        return this;
+    }
+
+    public Hora setHora(int hora, int minutos){
+        data.set(Calendar.MINUTE, minutos);
         data.set(Calendar.HOUR_OF_DAY, hora);
         return this;
     }
@@ -51,7 +65,7 @@ public class Hora{
         int hora = data.get(Calendar.HOUR_OF_DAY);
         int minutos = data.get(Calendar.MINUTE);
         if(minutos<10){
-            return Double.parseDouble(data.get(Calendar.HOUR_OF_DAY)+".0"+minutos);
+            return Double.parseDouble(hora+".0"+minutos);
         }
         return Double.parseDouble(hora+"."+minutos);
     }
@@ -69,6 +83,12 @@ public class Hora{
         return this;
     }
 
+    public Hora subtrair(int hora, int minutos){
+        data.add(Calendar.MINUTE, -minutos);
+        data.add(Calendar.HOUR_OF_DAY, -hora);
+        return this;
+    }
+
     public Hora somar(Hora hora){
         data.add(Calendar.MINUTE, hora.getMinutos());
         data.add(Calendar.HOUR_OF_DAY, hora.getHora());
@@ -82,13 +102,17 @@ public class Hora{
 
 
     public Hora parse(String hora){
+        data.set(Calendar.HOUR_OF_DAY, 0);
+        data.set(Calendar.MINUTE, 0);
         if(hora == null || !hora.contains(":")){
-            data.set(Calendar.HOUR_OF_DAY, 0);
-            data.set(Calendar.MINUTE, 0);
             return this;
         }
 
         String[] hrs = hora.split(":");
+
+        if(hrs[0] == null || hrs[1] == null){
+            return this;
+        }
 
         int h = Integer.parseInt(hrs[0]);
         int m = Integer.parseInt(hrs[1]);
