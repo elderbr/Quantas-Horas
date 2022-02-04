@@ -7,7 +7,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -24,17 +23,19 @@ public class Conexao extends SQLiteOpenHelper {
 
 
     public Conexao(@Nullable Context context) {
-        super(context, "quantahora.db", null, 1);
+        super(context, "quantahora", null, 1);
         this.context = context;
+
+        if(select().getDoubleHora()<1){
+            insert(new Hora(11,45));
+        }
+
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        sql = "CREATE TABLE IF NOT EXISTS hora (id INTEGER PRIMARY KEY AUTOINCREMENT, hora VARCHAR(5));";
+        sql = "CREATE TABLE IF NOT EXISTS hora (id INTEGER PRIMARY KEY AUTOINCREMENT, hora TEXT);";
         db.execSQL(sql);
-
-        insert(new Hora(11, 45));
-
     }
 
     @Override
@@ -42,37 +43,43 @@ public class Conexao extends SQLiteOpenHelper {
 
     }
 
-    public boolean insert(Hora hora) {
-        if (select().getDoubleHora() < 1.0) {
+    public long insert(Hora hora) {
+        try {
             db = this.getWritableDatabase();
             values = new ContentValues();
             values.put("hora", hora.toHoras());
-            return (db.insert("hora", null, values) > 0 ? true : false);
-        } else {
-            return false;
+            return db.insert("hora", null, values);
+        } catch (SQLException e) {
+            Log.i("Script", "Erro ao adicionar >> " + e.getMessage());
+            return 0;
         }
     }
 
     public int update(Hora hora) {
-        db = this.getWritableDatabase();
-        values = new ContentValues();
-        values.put("hora", hora.toHoras());
-        return db.update("hora", values, "id = 1", null);
+        try {
+            db = this.getWritableDatabase();
+            values = new ContentValues();
+            values.put("hora", hora.toHoras());
+            return db.update("hora", values, "id = 1", null);
+        } catch (SQLException e) {
+            Log.i("Script", "Erro ao atualizar >> " + e.getMessage());
+            return 0;
+        }
     }
 
     public Hora select() {
         hora = new Hora();
         hora.setHora(0, 0);
-        db = this.getReadableDatabase();
+
         try {
-            curso = db.rawQuery("SELECT * FROM hora;", null);
+            db = super.getReadableDatabase();
+            curso = db.rawQuery("SELECT * FROM hora", null);
             while (curso.moveToNext()) {
-                hora.parse(curso.getString(0));
+                hora.parse(curso.getString(1));
             }
+            curso.close();
         } catch (SQLException e) {
-            e.printStackTrace();
-            Toast.makeText(context, "Erro >> "+ e.getMessage(), Toast.LENGTH_LONG);
-            Log.i("Script","Erro >> "+ e.getMessage());
+            Log.i("Script", "Erro: " + e.getMessage());
         }
         return hora;
     }
