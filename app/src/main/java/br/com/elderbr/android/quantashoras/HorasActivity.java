@@ -1,12 +1,12 @@
 package br.com.elderbr.android.quantashoras;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class HorasActivity extends AppCompatActivity {
 
@@ -30,18 +30,16 @@ public class HorasActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String hr = et_hora_maxima.getText().toString().trim();
-                Hora hora = new Hora(0,0);
+                Hora hora = new Hora(0, 0);
 
-                if(hr.length()>3&& hr.contains(":")) {
+                if (hr.length() > 3 && hr.contains(":")) {
                     hora.parse(hr);
-
-
-                    if(conexao.insert(hora)){
+                    if (conexao.update(hora) > 0) {
                         Toast.makeText(HorasActivity.this, "Hora Salva", Toast.LENGTH_SHORT).show();
-                    }else{
+                    } else {
                         Toast.makeText(HorasActivity.this, "Erro ao salvar a Hora!!!", Toast.LENGTH_SHORT).show();
                     }
-                }else{
+                } else {
                     Toast.makeText(HorasActivity.this, "Digite uma hora valida!!!", Toast.LENGTH_SHORT).show();
                 }
             }
