@@ -20,15 +20,19 @@
         android:id="@+id/et_hora_maxima"
         app:layout_constraintTop_toBottomOf="@+id/tv_hora_maxima"
         app:layout_constraintLeft_toLeftOf="@+id/tv_hora_maxima"
-        style="@style/hora" />
+        style="@style/hora"
+        android:layout_marginTop="6dp"
+        />
 
     <Button
         android:id="@+id/bt_salvar"
-        android:text="Salvar"
+        android:text="Alterar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/et_hora_maxima"
         app:layout_constraintLeft_toLeftOf="@+id/et_hora_maxima"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_limpar"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
