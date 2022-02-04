@@ -9,4 +9,7 @@ Se a hora trabalhada for maior que **11:45** mostra no campo **Devendo** a subtr
 ### Adicionado **Horas na Casa**
 > Horas na casa são os horários que passaram de 11:45. Você pode adicionar essas horas caso a suas horas total for inferior a 11:45 adicionando para ser pago as horas da casa.
 
+### Adicionar a opção de escolher a hora máxima ###
+> Escolha a hora máxima trabalhada no menu
+
 >Disponivel na playstore [Quantas Horas](https://play.google.com/store/apps/details?id=br.com.android.elderbr.quantashoras)
