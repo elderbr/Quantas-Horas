@@ -4,6 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HorasActivity">
+    tools:context=".HorasActivity"
+    android:background="@color/grey_300"
+    >
+
+    <TextView
+        android:id="@+id/tv_hora_maxima"
+        android:text="Hora Máxima trabalhada"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/text"
+        android:layout_marginTop="10dp"
+        />
+    <EditText
+        android:id="@+id/et_hora_maxima"
+        app:layout_constraintTop_toBottomOf="@+id/tv_hora_maxima"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_hora_maxima"
+        style="@style/hora" />
+
+    <Button
+        android:id="@+id/bt_salvar"
+        android:text="Salvar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/et_hora_maxima"
+        app:layout_constraintLeft_toLeftOf="@+id/et_hora_maxima"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
