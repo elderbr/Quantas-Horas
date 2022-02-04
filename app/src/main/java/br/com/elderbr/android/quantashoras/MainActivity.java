@@ -33,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
     private Hora hr_usada = new Hora(0, 0);
     private Hora hr_casaRestante = new Hora(0, 0);
 
+    // HORA MAXIMA TRABALHADA
+    private Conexao conexao;
+    private Hora hr_maxima = new Hora();
+
 
     private String entrada, saida, tempo, hora1, hora2, casa, usada, restante, total;
 
@@ -47,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Conexao conexao = new Conexao(this);
         instanciando();
+        conexao = new Conexao(this);
 
         entradaEt.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -147,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menu_hora:
                 startActivity(new Intent(MainActivity.this, HorasActivity.class));
                 return true;
@@ -158,6 +162,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void horaTrabalhada() {
+
+        // HORA MÁXIMA TRABALHADA
+        hr_maxima.setHora(conexao.select());
 
         // INSTANCIANDO HORAS
         hr_hora = new Hora(0, 0);
@@ -190,11 +197,11 @@ public class MainActivity extends AppCompatActivity {
             hr_fechamento.somar(hr_tempo);// SOMANDO COM TEMPO
             hr_fechamento.somar(hr_casa);// SOMANDO COM A HORA DA CASA
 
-            if (hr_hora.getDoubleHora() > 11.45) {// SE A HORA TRABALHADA FOR MAIOR QUE 11:45
+            if (hr_hora.getDoubleHora() > hr_maxima.getDoubleHora()) {// SE A HORA TRABALHADA FOR MAIOR QUE 11:45
 
-                // DEVENDO É IGUAL A HORA MENOS 11:45
+                // DEVENDO É IGUAL A HORA MENOS HORA MÁXIMA TRABALHADA
                 hr_devendo.setHora(hr_hora);
-                hr_devendo.subtrair(11, 45);
+                hr_devendo.subtrair(hr_maxima);
 
             } else {
                 hr_devendo.setHora(0, 0);
