@@ -76,7 +76,7 @@ public class Hora{
 
     public Hora subtrair(Hora hora){
         if(getHora() < hora.getHora()){
-            data.add(Calendar.DAY_OF_YEAR, 1);
+            hora.addDia(1);
         }
         data.add(Calendar.MINUTE, -hora.getMinutos());
         data.add(Calendar.HOUR_OF_DAY, -hora.getHora());
@@ -129,6 +129,11 @@ public class Hora{
 
     public String toDia(){
         return ""+data.get(Calendar.DAY_OF_MONTH);
+    }
+
+    public Hora addDia(int dia){
+        data.add(Calendar.DAY_OF_YEAR, dia);
+        return this;
     }
 
 
