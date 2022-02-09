@@ -98,11 +98,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 hora1 = hora1_Et.getText().toString().trim();
-                if (hora1.length() > 3 && hora1.contains(":")) {
-                    hr_hora1.parse(hora1);
-                } else {
-                    hr_hora1.setHora(0, 0);
-                }
                 somaHoras();
                 return false;
             }
@@ -112,11 +107,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 hora2 = hora2_Et.getText().toString().trim();
-                if (hora2.length() > 3 && hora2.contains(":")) {
-                    hr_hora2.parse(hora2);
-                } else {
-                    hr_hora2.setHora(0, 0);
-                }
                 somaHoras();
                 return false;
             }
@@ -251,8 +241,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (hr_devendo.getDoubleHora() > 0) {
             hora1_Et.setText(hr_devendo.toHoras());
-        } else {
-            hora1_Et.setText("");
         }
 
         hora1 = hora1_Et.getText().toString().trim();
@@ -261,6 +249,7 @@ public class MainActivity extends AppCompatActivity {
         hr_total.setHora(0, 0);
 
         if (hora1.length() > 3 && hora1.contains(":") && hora2.length() > 3 && hora2.contains(":")) {
+
             hr_hora1.setHora(hora1);
             hr_hora2.setHora(hora2);
 
