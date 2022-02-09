@@ -97,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
         hora1_Et.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                hora1 = hora1_Et.getText().toString().trim();
                 somaHoras();
                 return false;
             }
@@ -106,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
         hora2_Et.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                hora2 = hora2_Et.getText().toString().trim();
                 somaHoras();
                 return false;
             }
@@ -193,6 +191,8 @@ public class MainActivity extends AppCompatActivity {
                 hr_devendo.setHora(hr_hora);
                 hr_devendo.subtrair(hr_maxima);
 
+                hora1_Et.setText(hr_devendo.toHoras());// IMPRIME NO CAMPO
+
             } else {
                 hr_devendo.setHora(0, 0);
             }
@@ -214,9 +214,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // HORA NA CASA É O VALOR DA HORA NA CASA MENOS A HORA DEVENDO SOBRA O RESTANTE DE HORAS NA CASA
-        if (hr_casa.getDoubleHora() > 0) {
+        if (hr_casa.getDoubleHora() > 0 ) {
 
-            hr_usada.setHora(hr_casa);
+            if(hr_casa.getDoubleHora()< hr_devendo.getDoubleHora()){
+                hr_usada.setHora(hr_devendo);
+            }else {
+                hr_usada.setHora(hr_casa);
+            }
             hr_usada.subtrair(hr_devendo);
 
             hr_casaRestante.setHora(hr_casa);
@@ -238,10 +242,6 @@ public class MainActivity extends AppCompatActivity {
         hr_hora1 = new Hora(0, 0);
         hr_hora2 = new Hora(0, 0);
         hr_total = new Hora(0, 0);
-
-        if (hr_devendo.getDoubleHora() > 0) {
-            hora1_Et.setText(hr_devendo.toHoras());
-        }
 
         hora1 = hora1_Et.getText().toString().trim();
         hora2 = hora2_Et.getText().toString().trim();
