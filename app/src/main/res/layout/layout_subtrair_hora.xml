@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layout_hora"
+    android:id="@+id/layout_subtrair_hora"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/msgTv"
+    app:layout_constraintTop_toBottomOf="@+id/layout_hora"
     android:background="@color/laranja_1"
     android:paddingBottom="10dp"
     android:layout_marginTop="10dp"
@@ -21,7 +21,7 @@
         app:layout_constraintRight_toRightOf="parent"
         android:background="@color/marrom"
         android:padding="8dp"
-        android:text="Somar Horas"
+        android:text="Subtrair Horas"
         android:textColor="@color/white"
         android:textAllCaps="true"
         android:textSize="18dp"
@@ -42,7 +42,7 @@
         />
 
     <EditText
-        android:id="@+id/et_hora_01"
+        android:id="@+id/subtrair_hora1Et"
         style="@style/hora"
         app:layout_constraintStart_toStartOf="@+id/tv_hora_01"
         app:layout_constraintTop_toBottomOf="@+id/tv_hora_01" />
@@ -52,12 +52,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:text="+"
+        android:text="-"
         android:textSize="36dp"
         android:textStyle="bold"
         android:textColor="@color/white"
-        app:layout_constraintBaseline_toBaselineOf="@+id/et_hora_01"
-        app:layout_constraintLeft_toRightOf="@+id/et_hora_01" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/subtrair_hora1Et"
+        app:layout_constraintLeft_toRightOf="@+id/subtrair_hora1Et" />
 
     <TextView
         android:id="@+id/tv_hora_02"
@@ -70,13 +70,13 @@
         app:layout_constraintLeft_toRightOf="@+id/sinal" />
 
     <EditText
-        android:id="@+id/et_hora_02"
+        android:id="@+id/subtrair_hora2Et"
         style="@style/hora"
         app:layout_constraintLeft_toLeftOf="@+id/tv_hora_02"
         app:layout_constraintTop_toBottomOf="@+id/tv_hora_01" />
 
     <TextView
-        android:id="@+id/tv_sinal_igual"
+        android:id="@+id/subtrair_sinal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -84,8 +84,8 @@
         android:textSize="36dp"
         android:textColor="@color/white"
         android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/et_hora_02"
-        app:layout_constraintLeft_toRightOf="@+id/et_hora_02" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/subtrair_hora2Et"
+        app:layout_constraintLeft_toRightOf="@+id/subtrair_hora2Et" />
 
     <TextView
         android:id="@+id/tv_hora_03"
@@ -95,10 +95,10 @@
         android:text="TOTAL"
         android:textColor="@color/white"
         app:layout_constraintBaseline_toBaselineOf="@+id/tv_hora_01"
-        app:layout_constraintLeft_toRightOf="@+id/tv_sinal_igual" />
+        app:layout_constraintLeft_toRightOf="@+id/subtrair_sinal" />
 
     <EditText
-        android:id="@+id/et_hora_03"
+        android:id="@+id/subtrair_totalEt"
         style="@style/hora"
         app:layout_constraintLeft_toLeftOf="@+id/tv_hora_03"
         app:layout_constraintTop_toBottomOf="@+id/tv_hora_03"

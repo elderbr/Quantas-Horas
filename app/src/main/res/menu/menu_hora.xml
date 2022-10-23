@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-<item
-    android:id="@+id/menu_hora"
-    android:title="Adicionar Hora"
-    android:icon="@drawable/ic_time"
-    app:showAsAction="ifRoom"
-    />
+
+    <item
+        android:id="@+id/menu_hora"
+        android:icon="@drawable/ic_time"
+        android:title="Adicionar Hora"
+        app:showAsAction="collapseActionView" />
 </menu>

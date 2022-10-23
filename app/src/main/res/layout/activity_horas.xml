@@ -9,10 +9,26 @@
     >
 
     <TextView
+        android:id="@+id/jornadaNormalTV"
+        style="@style/text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="20dp"
+        android:text="Jornada Normal"
+        />
+    <EditText
+        android:id="@+id/jornadaNormalEt"
+        app:layout_constraintLeft_toLeftOf="@id/jornadaNormalTV"
+        app:layout_constraintTop_toBottomOf="@+id/jornadaNormalTV"
+        style="@style/hora"
+        />
+
+    <TextView
         android:id="@+id/tv_hora_maxima"
         android:text="Hora Máxima trabalhada"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/jornadaNormalTV"
+        app:layout_constraintTop_toBottomOf="@+id/jornadaNormalEt"
         style="@style/text"
         android:layout_marginTop="10dp"
         />
