@@ -1,9 +1,34 @@
-# HORAS TRABALHADAS
+# Quantas Horas
+Quantas Horas faz o calculo das horas trabalhadas.
+Se for adicionado o tempo de refeição vai ser subtraindo da jornada de trabalho.
 
-Horas trabalhas faz a subtração do campo **Saída** menos o campo **Entrada**, se houver o **Tempo** adicional ele soma com a hora da saída mostrando no campo **Fechamento** a hora que deve ser fechado.
-Se a hora trabalhada for maior que **11:45** mostra no campo **Devendo** a subtração das horas trabalhadas menos **11:45**.
+### Entrada
+Hora que inicio o trabalho.
 
-### Somando as Horas da Casa
+### Inicio da Refeição
+A hora que inicio sua refeição
+
+### Fim da Refeição
+A hora que retornou da refeição
+
+### Saída
+A hora que saiu do trabalho
+
+### Tempo
+Se trata de tempo adicional para fazer alguma tarefa.
+Somar com a saída e mostrar no campo **Fechamento**.
+
+### Horas
+Quantidade horas trabalhadas
+
+### Extra
+Quantidade de horas à mais trabalhada.
+
+### Fechamento
+Mostra o horário que finalizou sua jornada de trabalho.
+
+
+### Somando as Horas
 > Você pode somar horas da casa mais a hora do dia e assim saber o valor das somas.
 
 ### Adicionado **Horas na Casa**
