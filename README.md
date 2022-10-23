@@ -3,29 +3,29 @@ Quantas Horas faz o calculo das horas trabalhadas.
 Se for adicionado o tempo de refeição vai ser subtraindo da jornada de trabalho.
 
 ### Entrada
-Hora que inicio o trabalho.
+> Hora que inicio o trabalho.
 
 ### Inicio da Refeição
-A hora que inicio sua refeição
+> A hora que inicio sua refeição
 
 ### Fim da Refeição
-A hora que retornou da refeição
+> A hora que retornou da refeição
 
 ### Saída
-A hora que saiu do trabalho
+> A hora que saiu do trabalho
 
 ### Tempo
-Se trata de tempo adicional para fazer alguma tarefa.
-Somar com a saída e mostrar no campo **Fechamento**.
+> Se trata de tempo adicional para fazer alguma tarefa.
+> Somar com a saída e mostrar no campo **Fechamento**.
 
 ### Horas
-Quantidade horas trabalhadas
+> Quantidade horas trabalhadas
 
 ### Extra
-Quantidade de horas à mais trabalhada.
+> Quantidade de horas à mais trabalhada.
 
 ### Fechamento
-Mostra o horário que finalizou sua jornada de trabalho.
+> Mostra o horário que finalizou sua jornada de trabalho.
 
 
 ### Somando as Horas
