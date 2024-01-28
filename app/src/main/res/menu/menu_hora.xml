@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/menu_chegada"
+        android:icon="@drawable/ic_time"
+        android:title="Chegada"
+        app:showAsAction="collapseActionView"
+        />
+    <item
         android:id="@+id/menu_hora"
         android:icon="@drawable/ic_time"
         android:title="Adicionar Hora"

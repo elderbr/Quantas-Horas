@@ -220,6 +220,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_hora:
                 startActivity(new Intent(MainActivity.this, HorasActivity.class));
                 return true;
+            case R.id.menu_chegada:
+                startActivity(new Intent(MainActivity.this, ChegadaActivity.class));
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
