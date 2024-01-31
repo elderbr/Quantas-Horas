@@ -3,83 +3,72 @@ package br.com.elderbr.android.quantashoras.controllers;
 import android.content.Context;
 import android.widget.EditText;
 
-import org.jetbrains.annotations.NotNull;
-
 import br.com.elderbr.android.quantashoras.Conexao;
-import br.com.elderbr.android.quantashoras.MainActivity;
 import br.com.elderbr.android.quantashoras.models.Hora;
 import br.com.elderbr.android.quantashoras.models.Horario;
-import br.com.elderbr.android.quantashoras.utils.Msg;
 
 public class HoraController {
 
-    private Conexao conexao = new Conexao(null);
+    private Conexao conexao;
     private Horario horario;
-    private Hora jornadaNormal;
-    private Hora horaMaxima;
+    private Hora hrJornada = new Hora(0, 0);
+    private Hora hrMaxima = new Hora(0, 0);
+    private Hora hrPercurso = new Hora(0, 0);
     private String hora;
 
     public HoraController(Context context) {
         conexao = new Conexao(context);
+        horario = conexao.select();
     }
 
-    public void setJornada(@NotNull EditText editText) throws Exception {
-        jornadaNormal = null;
+    public void setHoraNormal(EditText editText) {
         hora = editText.getText().toString().trim();
-        if (hora.length() >= 3 && hora.contains(":")) {
-            jornadaNormal = new Hora(hora);
-            if (jornadaNormal.getDoubleHora() < 4) {
-                jornadaNormal = null;
-                throw new Exception("A jornada normal não pode ser menor que 4 horas!");
-            }
+        if (hora.length() < 3 && !hora.contains(":")) {
+            return;
         }
+        hrJornada = new Hora(hora);
     }
 
-    public void setHoraMaxima(@NotNull EditText editText) throws Exception {
-        horaMaxima = null;
+    public void setMaxima(EditText editText) {
         hora = editText.getText().toString().trim();
-        if (hora.length() >= 3 && hora.contains(":")) {
-            horaMaxima = new Hora(hora);
-            if (horaMaxima.getDoubleHora() < 4) {
-                horaMaxima = null;
-                throw new Exception("A hora máxima de hora extra não pode ser menor que 4 horas!");
-            }
+        if (hora.length() < 3 && !hora.contains(":")) {
+            return;
         }
+        hrMaxima = new Hora(hora);
     }
 
-    public long addHora() throws Exception {
-        if(jornadaNormal == null){
-            throw new Exception("Digite a jornada normal de trabalho!");
+    public void setPercurso(EditText editText) {
+        hora = editText.getText().toString().trim();
+        if (hora.length() < 3 && !hora.contains(":")) {
+            return;
         }
-        if(horaMaxima == null){
-            throw new Exception("Digite a hora máxima de hora extra!");
-        }
-        horario = new Horario();
-        horario.setJornadaNormal(jornadaNormal);
-        horario.setHoraMaxima(horaMaxima);
-        return conexao.insert(horario);
+        hrPercurso = new Hora(hora);
     }
 
-    public long updateHora() throws Exception {
-        if(jornadaNormal == null){
-            throw new Exception("Digite a jornada normal de trabalho!");
-        }
-        if(horaMaxima == null){
-            throw new Exception("Digite a hora máxima de hora extra!");
-        }
-        horario = new Horario();
-        horario.setJornadaNormal(jornadaNormal);
-        horario.setHoraMaxima(horaMaxima);
-        return conexao.update(horario);
+    public void carrega(EditText etJornada, EditText etMaximo, EditText etPercurso){
+        horario = conexao.select();
+        etJornada.setText(horario.getJornada().toHoras());
+        etMaximo.setText(horario.getHoraMaxima().toHoras());
+        etPercurso.setText(horario.getPercurso().toHoras());
     }
 
-    public int addUpdate() throws Exception {
-        if(conexao.select() == null){
-            Msg.Log("Se foi adicionado >> "+addHora(), getClass());
-            return 1;
-        }else{
-            updateHora();
-            return 2;
+    public boolean save() {
+        boolean save = false;
+        if (hrJornada.getDoubleHora() > 0 && !horario.getJornada().equals(hrJornada)) {
+            horario.setJornada(hrJornada);
+            save = true;
         }
+        if (hrMaxima.getDoubleHora() > 0 && !horario.getHoraMaxima().equals(hrMaxima)) {
+            horario.setHoraMaxima(hrMaxima);
+            save = true;
+        }
+        if (hrPercurso.getDoubleHora() > 0 && !horario.getPercurso().equals(hrPercurso)) {
+            horario.setPercurso(hrPercurso);
+            save = true;
+        }
+        if (save) {
+            return (conexao.update(horario) > 0);
+        }
+        return false;
     }
 }

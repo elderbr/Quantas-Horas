@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Objects;
 
 import br.com.elderbr.android.quantashoras.utils.Msg;
 
@@ -235,5 +236,12 @@ public class Hora {
     @Override
     public String toString() {
         return toHoras();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || this != o) return false;
+        Hora hora = (Hora) o;
+        return Objects.equals(data.getTime(), hora.data.getTime());
     }
 }

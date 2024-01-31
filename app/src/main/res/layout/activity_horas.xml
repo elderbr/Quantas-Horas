@@ -11,6 +11,7 @@
     <TextView
         android:id="@+id/jornadaNormalTV"
         style="@style/text"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="40dp"
@@ -40,12 +41,30 @@
         android:layout_marginTop="6dp"
         />
 
+    <TextView
+        android:id="@+id/tvPercurso"
+        style="@style/text"
+        app:layout_constraintLeft_toLeftOf="@+id/jornadaNormalTV"
+        app:layout_constraintTop_toBottomOf="@+id/et_hora_maxima"
+        android:layout_marginTop="10sp"
+        android:text="Percurso"
+        />
+
+    <EditText
+        android:id="@+id/etPercurso"
+        style="@style/hora"
+        app:layout_constraintLeft_toLeftOf="@+id/jornadaNormalTV"
+        app:layout_constraintTop_toBottomOf="@+id/tvPercurso"
+        />
+
+
+
     <Button
         android:id="@+id/bt_salvar"
         android:text="Alterar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/et_hora_maxima"
+        app:layout_constraintTop_toBottomOf="@+id/etPercurso"
         app:layout_constraintLeft_toLeftOf="@+id/et_hora_maxima"
         android:layout_marginTop="10dp"
         android:background="@drawable/button_limpar"

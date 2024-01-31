@@ -5,20 +5,22 @@ import java.util.List;
 
 public class Horario {
 
-    private Hora jornadaNormal;
-    private Hora horaMaxima;
+    private Hora jornada = new Hora(7,40);
+    private Hora horaMaxima = new Hora(10,50);
+
+    private Hora percurso = new Hora(0, 30);
     private List<Horario> listaHorario = new ArrayList<>();
-    public static String[] columnName = new String[]{"jornada", "hora_maxima"};
+    public static String[] columnName = new String[]{"jornada", "hora_maxima", "hr_percurso"};
 
     public Horario() {
     }
 
-    public Hora getJornadaNormal() {
-        return jornadaNormal;
+    public Hora getJornada() {
+        return jornada;
     }
 
-    public void setJornadaNormal(Hora jornadaNormal) {
-        this.jornadaNormal = jornadaNormal;
+    public void setJornada(Hora jornada) {
+        this.jornada = jornada;
     }
 
     public Hora getHoraMaxima() {
@@ -27,6 +29,14 @@ public class Horario {
 
     public void setHoraMaxima(Hora horaMaxima) {
         this.horaMaxima = horaMaxima;
+    }
+
+    public void setPercurso(Hora hora){
+        this.percurso = hora;
+    }
+
+    public Hora getPercurso(){
+        return percurso;
     }
 
     public Horario addHorario(Horario horario){
@@ -44,5 +54,9 @@ public class Horario {
 
     public static String ColumnHoraMaxima(){
         return columnName[1];
+    }
+
+    public static String ColumnPercurso(){
+        return columnName[2];
     }
 }

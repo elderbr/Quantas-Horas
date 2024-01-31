@@ -6,10 +6,8 @@ import android.widget.EditText;
 import org.jetbrains.annotations.NotNull;
 
 import br.com.elderbr.android.quantashoras.Conexao;
-import br.com.elderbr.android.quantashoras.MainActivity;
 import br.com.elderbr.android.quantashoras.models.Hora;
 import br.com.elderbr.android.quantashoras.models.Horario;
-import br.com.elderbr.android.quantashoras.utils.Msg;
 
 public class Jornada {
 
@@ -45,7 +43,7 @@ public class Jornada {
             normal = new Hora(7,0);
             horaMaxima = new Hora(10,40);
         }else{
-            normal = new Hora(horario.getJornadaNormal());
+            normal = new Hora(horario.getJornada());
             horaMaxima = new Hora(horario.getHoraMaxima());
         }
     }
@@ -125,7 +123,7 @@ public class Jornada {
                 normal = new Hora(7,0);
                 horaMaxima = new Hora(10,40);
             }else{
-                normal = new Hora(horario.getJornadaNormal());
+                normal = new Hora(horario.getJornada());
                 horaMaxima = new Hora(horario.getHoraMaxima());
             }
 
