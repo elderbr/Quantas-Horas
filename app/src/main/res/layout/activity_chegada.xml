@@ -36,6 +36,7 @@
                 style="@style/text"
                 android:layout_below="@+id/tvTpTitulo"
                 android:layout_marginLeft="30dp"
+                android:layout_marginTop="20sp"
                 android:text="Saída" />
 
             <EditText
@@ -116,6 +117,7 @@
                 style="@style/text"
                 android:layout_below="@+id/tvTsTitulo"
                 android:layout_marginLeft="30dp"
+                android:layout_marginTop="20sp"
                 android:text="Saída" />
 
             <EditText
