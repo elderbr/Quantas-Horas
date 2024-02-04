@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Borda Superior -->
+    <item android:top="2dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/marrom" />
+        </shape>
+    </item>
+
+    <!-- Borda Inferior -->
+    <item android:bottom="2dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/marrom" />
+        </shape>
+    </item>
+
+    <!-- Corpo (preenchimento sólido) -->
+    <item android:top="2dp" android:bottom="2dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#FCA604" />
+        </shape>
+    </item>
+</layer-list>

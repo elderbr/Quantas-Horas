@@ -2,7 +2,7 @@
 <resources>
 
     <style name="hora">
-        <item name="android:layout_width">66dp</item>
+        <item name="android:layout_width">80dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:maxLength">5</item>
         <item name="android:hint">00:00</item>
