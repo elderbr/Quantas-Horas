@@ -5,7 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/background"
-    tools:context=".ChegadaActivity">
+    tools:context=".ChegadaFragment">
 
 
     <RelativeLayout
@@ -27,13 +27,8 @@
 
             <TextView
                 android:id="@+id/tvTpTitulo"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
+                style="@style/title"
                 android:text="Lugar 1"
-                android:textColor="@color/marrom"
-                android:textSize="20sp"
-                android:background="@drawable/title"
-                android:gravity="center"
                 />
 
             <TextView
@@ -112,16 +107,8 @@
 
             <TextView
                 android:id="@+id/tvTsTitulo"
-                style="@style/text"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
+                style="@style/title"
                 android:text="Lugar 2"
-                android:textSize="20sp"
-                android:layout_marginBottom="20sp"
-                android:background="@drawable/title"
-                android:gravity="center"
                 />
 
             <TextView
@@ -192,13 +179,11 @@
 
         <Button
             android:id="@+id/btnChegar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/button"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="20sp"
-            android:layout_marginLeft="10sp"
-            android:layout_marginRight="10sp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/button"
+            android:textColor="@color/white"
             android:text="Calcular" />
 
 

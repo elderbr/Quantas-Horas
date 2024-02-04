@@ -3,16 +3,18 @@ package br.com.elderbr.android.quantashoras;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import br.com.elderbr.android.quantashoras.controllers.HoraController;
 import br.com.elderbr.android.quantashoras.controllers.MessegeDialogAlert;
 
-public class HorasActivity extends AppCompatActivity {
+public class HorasFragment extends Fragment {
 
     private Context myContext;
     private EditText etMaxima, etJornada, etPercurso;
@@ -21,26 +23,29 @@ public class HorasActivity extends AppCompatActivity {
     private HoraController horaController;
 
     private MessegeDialogAlert messege;
+    private View view;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_horas);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        myContext = this;
-        messege = new MessegeDialogAlert(HorasActivity.this);
+        view = inflater.inflate(R.layout.activity_horas, container, false);
+
+
+        myContext = view.getContext();
+        messege = new MessegeDialogAlert(new MainActivity());
 
         // EditText
-        etMaxima = findViewById(R.id.et_hora_maxima);
-        etJornada = findViewById(R.id.jornadaNormalEt);
-        etPercurso = findViewById(R.id.etPercurso);
+        etMaxima = view.findViewById(R.id.et_hora_maxima);
+        etJornada = view.findViewById(R.id.jornadaNormalEt);
+        etPercurso = view.findViewById(R.id.etPercurso);
 
         // Controlador
-        horaController = new HoraController(this);
+        horaController = new HoraController(view.getContext());
         horaController.carrega(etJornada, etMaxima, etPercurso);
 
         // Botão
-        bt_salvar = findViewById(R.id.bt_salvar);
+        bt_salvar = view.findViewById(R.id.bt_salvar);
 
         etJornada.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -76,5 +81,7 @@ public class HorasActivity extends AppCompatActivity {
                 }
             }
         });
+        // Inflate the layout for this fragment
+        return view;
     }
 }

@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">Quantas Horas</string>
+    <string name="menu_home">Quantas Horas</string>
+    <string name="menu_chegada">Chegada</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="open">Abrir</string>
+    <string name="close">Fechar</string>
+    <string name="setting">Configuração</string>
+    <string name="title_quantas_horas">Quantas Horas</string>
+    <string name="hora_normal">Hora Normal</string>
+    <string name="hora_maxima">Hora Máxima</string>
+    <string name="percurso">Percurso</string>
+    <string name="save">Salvar</string>
+    <string name="entrada">Entrada</string>
+    <string name="saida">Saída</string>
+    <string name="tempo">Tempo</string>
+    <string name="hora_trabalhada">Horas</string>
+    <string name="devendo">Devendo</string>
+    <string name="fechamento">Fechamento</string>
 </resources>

@@ -1,0 +1,203 @@
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <HorizontalScrollView
+        android:id="@+id/scroll_horizontal_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="60dp">
+
+            <!-- ENTRADA -->
+            <TextView
+                android:id="@+id/entradaTv"
+                style="@style/text"
+                android:layout_width="66dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:text="Entrada"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/entradaEt"
+                style="@style/hora"
+                app:layout_constraintLeft_toLeftOf="@+id/entradaTv"
+                app:layout_constraintTop_toBottomOf="@+id/entradaTv" />
+
+            <!-- INICIO DA REFEIÇÃO -->
+            <TextView
+                android:id="@+id/refInicioTv"
+                style="@style/text"
+                android:layout_marginLeft="20dp"
+                android:text="Inicio Ref"
+                app:layout_constraintBaseline_toBaselineOf="@+id/entradaTv"
+                app:layout_constraintLeft_toRightOf="@+id/entradaTv" />
+
+            <EditText
+                android:id="@+id/refInicioEt"
+                style="@style/hora"
+                app:layout_constraintBaseline_toBaselineOf="@+id/entradaEt"
+                app:layout_constraintLeft_toLeftOf="@+id/refInicioTv" />
+
+            <!-- FIM DA REFEIÇÃO -->
+            <TextView
+                android:id="@+id/refFinalTv"
+                style="@style/text"
+                android:layout_marginLeft="20dp"
+                android:text="Fim Ref"
+                app:layout_constraintBaseline_toBaselineOf="@+id/refInicioTv"
+                app:layout_constraintLeft_toRightOf="@+id/refInicioTv" />
+
+            <EditText
+                android:id="@+id/refFimEt"
+                style="@style/hora"
+                app:layout_constraintBaseline_toBaselineOf="@+id/entradaEt"
+                app:layout_constraintLeft_toLeftOf="@+id/refFinalTv" />
+
+            <!-- Saída -->
+            <TextView
+                android:id="@+id/saidaTv"
+                style="@style/text"
+                android:layout_width="66dp"
+                android:layout_marginLeft="30dp"
+                android:text="Saída"
+                app:layout_constraintBaseline_toBaselineOf="@+id/entradaTv"
+                app:layout_constraintLeft_toRightOf="@+id/refFinalTv" />
+
+            <EditText
+                android:id="@+id/saidaEt"
+                style="@style/hora"
+                app:layout_constraintBaseline_toBaselineOf="@+id/entradaEt"
+                app:layout_constraintLeft_toLeftOf="@+id/saidaTv" />
+
+            <!-- Tempo para Terminal ou Gargaem -->
+            <TextView
+                android:id="@+id/tempoTv"
+                style="@style/text"
+                android:layout_width="66dp"
+                android:layout_marginLeft="10dp"
+                android:text="Tempo"
+                app:layout_constraintBaseline_toBaselineOf="@+id/entradaTv"
+                app:layout_constraintLeft_toRightOf="@+id/saidaEt" />
+
+            <EditText
+                android:id="@+id/tempoEt"
+                style="@style/hora"
+                app:layout_constraintLeft_toLeftOf="@+id/tempoTv"
+                app:layout_constraintTop_toBottomOf="@+id/tempoTv" />
+
+            <!-- QUANTIDADE DE HORAS TRABALHADAS -->
+            <TextView
+                android:id="@+id/horaTv"
+                style="@style/text"
+                android:layout_width="66dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="20dp"
+                android:text="Horas"
+                app:layout_constraintLeft_toLeftOf="@id/entradaTv"
+                app:layout_constraintTop_toBottomOf="@+id/entradaEt" />
+
+            <EditText
+                android:id="@+id/horaEt"
+                style="@style/hora"
+                android:focusable="false"
+                android:text="00:00"
+                app:layout_constraintLeft_toLeftOf="@+id/horaTv"
+                app:layout_constraintTop_toBottomOf="@+id/horaTv" />
+
+            <!-- Extra -->
+            <TextView
+                android:id="@+id/extraTv"
+                style="@style/text"
+                android:layout_width="66dp"
+                android:layout_marginLeft="20dp"
+                android:text="Extra"
+                app:layout_constraintBaseline_toBaselineOf="@+id/horaTv"
+                app:layout_constraintLeft_toRightOf="@+id/horaEt" />
+
+            <EditText
+                android:id="@+id/extraEt"
+                style="@style/hora"
+                android:focusable="false"
+                android:text="00:00"
+                app:layout_constraintLeft_toLeftOf="@+id/extraTv"
+                app:layout_constraintTop_toBottomOf="@+id/extraTv" />
+
+            <!-- Fechamento -->
+            <TextView
+                android:id="@+id/fechamentoTv"
+                style="@style/text"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Fechamento"
+                app:layout_constraintBaseline_toBaselineOf="@+id/horaTv"
+                app:layout_constraintLeft_toRightOf="@+id/extraEt" />
+
+            <EditText
+                android:id="@+id/fechamentoEt"
+                style="@style/hora"
+                android:focusable="false"
+                android:text="00:00"
+                android:textIsSelectable="false"
+                app:layout_constraintBaseline_toBaselineOf="@+id/horaEt"
+                app:layout_constraintLeft_toLeftOf="@+id/fechamentoTv" />
+
+            <TextView
+                android:id="@+id/msgTv"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/laranja"
+                android:elevation="@dimen/cardview_compat_inset_shadow"
+                android:paddingTop="10dp"
+                android:text="Mensagem"
+                android:textAlignment="center"
+                android:textColor="@color/marrom"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fechamentoEt" />
+
+            <include layout="@layout/layout_hora_extra" />
+
+            <include layout="@layout/layout_subtrair_hora" />
+
+            <Button
+                android:id="@+id/fecharBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/button_limpar"
+                android:text="Fechar Jornada"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_subtrair_hora" />
+
+            <Button
+                android:id="@+id/limparBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/button_limpar"
+                android:text="Limpar"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@+id/fecharBtn"
+                app:layout_constraintLeft_toRightOf="@+id/fecharBtn" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </HorizontalScrollView>
+</androidx.core.widget.NestedScrollView>

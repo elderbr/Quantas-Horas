@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConfiguracaoFragment"
+    android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        >
+        <TextView
+            android:id="@+id/title_frag_config"
+            style="@style/title"
+            android:text="@string/title_quantas_horas"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            />
+        <TextView
+            android:id="@+id/tvHoraNormal"
+            style="@style/text"
+            android:text="@string/hora_normal"
+            android:layout_below="@+id/title_frag_config"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            />
+        <EditText
+            android:id="@+id/etHoraNormal"
+            style="@style/hora"
+            android:layout_below="@+id/tvHoraNormal"
+            android:layout_alignLeft="@+id/tvHoraNormal"/>
+
+        <TextView
+            android:id="@+id/tvHoraMaxima"
+            style="@style/text"
+            android:layout_alignBaseline="@+id/tvHoraNormal"
+            android:layout_toRightOf="@+id/etHoraNormal"
+            android:layout_marginLeft="20dp"
+            android:text="@string/hora_maxima"
+            />
+
+        <EditText
+            android:id="@+id/etHoraMaxima"
+            style="@style/hora"
+            android:layout_below="@+id/tvHoraMaxima"
+            android:layout_alignLeft="@+id/tvHoraMaxima"
+            />
+
+        <TextView
+            android:id="@+id/title_frag_config_chegada"
+            style="@style/title"
+            android:text="Chegada"
+            android:layout_below="@+id/etHoraMaxima"
+            android:layout_marginTop="20dp"
+            />
+
+        <TextView
+            android:id="@+id/tvPercurso"
+            style="@style/text"
+            android:text="@string/percurso"
+            android:layout_below="@+id/title_frag_config_chegada"
+            android:layout_marginTop="20dp"
+            android:layout_alignLeft="@+id/tvHoraNormal"
+            />
+        <EditText
+            android:id="@+id/etPercurso"
+            style="@style/hora"
+            android:layout_below="@+id/tvPercurso"
+            android:layout_alignLeft="@+id/tvPercurso"
+            />
+
+        <Button
+            android:id="@+id/btnSaveConfig"
+            style="@style/button"
+            android:text="@string/save"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            />
+
+    </RelativeLayout>
+
+</FrameLayout>

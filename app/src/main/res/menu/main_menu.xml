@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_quantas_horas"
+            android:icon="@drawable/icon_time"
+            android:title="@string/menu_home"
+            />
+        <item
+            android:id="@+id/nav_chegada"
+            android:icon="@drawable/icon_map"
+            android:title="@string/menu_chegada"
+            />
+
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/icon_setting"
+            android:title="@string/setting"
+            />
+    </group>
+
+</menu>

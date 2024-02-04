@@ -7,8 +7,6 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.Objects;
 
-import br.com.elderbr.android.quantashoras.utils.Msg;
-
 public class Hora {
 
     private final Calendar data = Calendar.getInstance(new Locale("pt", "BR"));
@@ -46,7 +44,7 @@ public class Hora {
                     throw new RuntimeException("Horário invalido \"" + horas + "\"!");
                 }
             }
-            if(horas.split(":").length == 1){
+            if (horas.split(":").length == 1) {
                 String hr = horas.split(":")[0];
                 data.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hr));
                 data.set(Calendar.MINUTE, 0);
@@ -56,7 +54,7 @@ public class Hora {
                 throw new RuntimeException("Horário invalido \"" + horas + "\"!");
             }
             try {
-                if(horas.length()==2) {
+                if (horas.length() == 2) {
                     data.set(Calendar.HOUR_OF_DAY, Integer.parseInt(horas));
                 }
             } catch (NumberFormatException e) {
@@ -139,6 +137,31 @@ public class Hora {
         return this;
     }
 
+    public Hora subtrair(String hora) {
+
+        if(hora.isBlank() || !hora.contains(":")){
+            return this;
+        }
+
+        String[] hrs = hora.split(":");
+
+        if(hrs.length < 2){
+            return this;
+        }
+
+        int hr = Integer.parseInt(hrs[0]);
+        int min = Integer.parseInt(hrs[1]);
+
+        Hora hors = new Hora(hr, min);
+
+        if (getDoubleHora()< hors.getDoubleHora()) {
+            data.add(Calendar.DAY_OF_YEAR, 1);
+        }
+        data.add(Calendar.MINUTE, -hors.getMinutos());
+        data.add(Calendar.HOUR_OF_DAY, -hors.getHora());
+        return this;
+    }
+
     public Hora subtrair(int hora, int minutos) {
         data.add(Calendar.MINUTE, -minutos);
         data.add(Calendar.HOUR_OF_DAY, -hora);
@@ -189,16 +212,16 @@ public class Hora {
     }
 
 
-    public Hora parse(String hora) {
+    public Hora parse(String hora) throws NumberFormatException {
         data.set(Calendar.HOUR_OF_DAY, 0);
         data.set(Calendar.MINUTE, 0);
-        if (hora == null || !hora.contains(":")) {
+        if (hora.isBlank() || !hora.contains(":")) {
             return this;
         }
 
         String[] hrs = hora.split(":");
 
-        if (hrs[0] == null || hrs[1] == null) {
+        if (hrs.length < 2) {
             return this;
         }
 

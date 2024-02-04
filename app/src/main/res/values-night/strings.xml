@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="menu_chegada">Chegada</string>
+    <string name="open">Abrir</string>
+    <string name="close">Fechar</string>
+    <string name="setting">Configuração</string>
+    <string name="percurso">Percurso</string>
+</resources>

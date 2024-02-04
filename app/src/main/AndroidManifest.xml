@@ -9,10 +9,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuantasHoras">
         <activity
-            android:name=".ChegadaActivity"
+            android:name=".ChegadaFragment"
             android:exported="false" />
         <activity
-            android:name=".HorasActivity"
+            android:name=".HorasFragment"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
