@@ -78,10 +78,18 @@ public class QuantaHoraController {
 
             // Subtraindo as horas
             trabalhada.subtrair(hrEntrada);
-            if (trabalhada.getDoubleHora() > horario.getJornada().getDoubleHora()) {
+            if (trabalhada.getDoubleHora() > hrMaxima.getDoubleHora()) {
+
                 hrDevendo = new Hora(trabalhada);
-                hrDevendo.subtrair(horario.getJornada());
+                hrFechamento.setHora(trabalhada);
+
+                // Calculando quantidade horas devendo
+                hrDevendo.subtrair(hrMaxima);
                 etDevendo.setText(hrDevendo.toHoras());
+
+                hrFechamento.subtrair(hrDevendo);
+                etFechamento.setText(hrFechamento.toHoras());
+
             } else {
                 etDevendo.setText("00:00");
             }
