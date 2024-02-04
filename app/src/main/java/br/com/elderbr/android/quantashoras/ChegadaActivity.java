@@ -15,8 +15,7 @@ import br.com.elderbr.android.quantashoras.models.Hora;
 
 public class ChegadaActivity extends AppCompatActivity {
 
-    private Chegada chegada = new Chegada();
-    private ChegadaController chegadaCtrl = new ChegadaController();
+    private ChegadaController chegadaCtrl;
     private EditText etTpSaida, etTpPercurso, etTpChegada, etTpPrevisaoSaida;
     private EditText etTsSaida, etTsPercurso, etTsChegada, etTsPrevisaoSaida;
 
@@ -29,19 +28,7 @@ public class ChegadaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chegada);
 
-        // Campos lugar 1
-        etTpSaida = findViewById(R.id.etTpSaida);
-        etTpPercurso = findViewById(R.id.etTpPercurso);
-        etTpChegada = findViewById(R.id.etTpChegada);
-        etTpPrevisaoSaida = findViewById(R.id.etTpPrevisaoSaida);
-
-        // Campos lugar 2
-        etTsSaida = findViewById(R.id.etTsSaida);
-        etTsPercurso = findViewById(R.id.etTsPercurso);
-        etTsChegada = findViewById(R.id.etTsChegada);
-        etTsPrevisaoSaida = findViewById(R.id.etTsPrevisaoSaida);
-
-        btnCalcular = findViewById(R.id.btnChegar);
+        init();
 
         etTpSaida.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -103,7 +90,26 @@ public class ChegadaActivity extends AppCompatActivity {
                 }
             }
         });
+    }
 
+    private void init(){
+        chegadaCtrl = new ChegadaController(ChegadaActivity.this);
 
+        // Campos lugar 1
+        etTpSaida = findViewById(R.id.etTpSaida);
+        etTpPercurso = findViewById(R.id.etTpPercurso);
+        etTpChegada = findViewById(R.id.etTpChegada);
+        etTpPrevisaoSaida = findViewById(R.id.etTpPrevisaoSaida);
+
+        // Campos lugar 2
+        etTsSaida = findViewById(R.id.etTsSaida);
+        etTsPercurso = findViewById(R.id.etTsPercurso);
+        etTsChegada = findViewById(R.id.etTsChegada);
+        etTsPrevisaoSaida = findViewById(R.id.etTsPrevisaoSaida);
+
+        btnCalcular = findViewById(R.id.btnChegar);
+
+        // Carrega o tempo de percurso
+        chegadaCtrl.carrega(etTpPercurso, etTsPercurso);
     }
 }

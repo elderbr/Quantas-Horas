@@ -1,27 +1,36 @@
 package br.com.elderbr.android.quantashoras.controllers;
 
+import android.content.Context;
 import android.widget.EditText;
 
-import org.jetbrains.annotations.NotNull;
-
+import br.com.elderbr.android.quantashoras.Conexao;
 import br.com.elderbr.android.quantashoras.models.Chegada;
 import br.com.elderbr.android.quantashoras.models.Hora;
+import br.com.elderbr.android.quantashoras.models.Horario;
+import br.com.elderbr.android.quantashoras.utils.Msg;
 
 public class ChegadaController {
+
+    private Conexao conexao;
     private Chegada principal = new Chegada();
     private Chegada secundario = new Chegada();
 
     private final String HORA_DEFAULT = "00:00";
 
-    public ChegadaController() {
+    public ChegadaController(Context context) {
+         conexao = new Conexao(context);
     }
 
-    public void setSaida(@NotNull EditText editText) throws Exception {
-        String hr = editText.getText().toString();
-
-        // Verificar se a hora digita é maior que 2 caracteres e se possui 2 pontos
-        if (hr.length() > 2 && hr.contains(":")) {
-
+    public void carrega(EditText etTpPercurso, EditText etTsPercurso){
+        try {
+            Horario horario = conexao.select();
+            Msg.Log("Horario: "+ horario.toString(), getClass());
+            if( horario != null ){
+                etTpPercurso.setText(horario.getPercurso().toHoras());
+                etTsPercurso.setText(horario.getPercurso().toHoras());
+            }
+        }catch (Exception e){
+            Msg.Erro(e.getMessage(), e);
         }
     }
 
