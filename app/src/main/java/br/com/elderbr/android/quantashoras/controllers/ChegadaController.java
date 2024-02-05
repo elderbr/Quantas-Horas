@@ -145,4 +145,26 @@ public class ChegadaController {
         etTsChegada.setText(secundario.toChegada());
         etTsPrevisaoSaida.setText(secundario.toPrevisaoSaida());
     }
+
+    public void calcularCatraca(EditText etCatraca1, EditText etCatraca2, EditText etCatracaTotal) throws NumberFormatException{
+        String catraca1 = etCatraca1.getText().toString().trim();
+        String catraca2 = etCatraca2.getText().toString().trim();
+
+        if(catraca1.length()<1 || catraca2.length()<1){
+            etCatracaTotal.setText("00");
+            return;
+        }
+
+        int inicio = Integer.parseInt(catraca1);
+        int fim = Integer.parseInt(catraca2);
+
+        if(fim < inicio){
+            etCatracaTotal.setText("00");
+            return;
+        }
+
+        int total = fim - inicio;
+        etCatracaTotal.setText(String.valueOf(total));
+
+    }
 }

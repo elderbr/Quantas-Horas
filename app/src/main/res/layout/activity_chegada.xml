@@ -179,6 +179,65 @@
 
         </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_below="@+id/ly_ts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20sp"
+            >
+
+            <TextView
+                android:id="@+id/title_catraca"
+                style="@style/title"
+                android:text="Catracas"
+                />
+
+            <EditText
+                android:id="@+id/etCatraca1"
+                style="@style/catraca"
+                android:layout_below="@+id/title_catraca"
+                android:layout_marginTop="20sp"
+                android:layout_marginLeft="20sp"
+                />
+
+            <EditText
+                android:id="@+id/etCatraca2"
+                style="@style/catraca"
+                android:layout_alignBaseline="@+id/etCatraca1"
+                android:layout_toRightOf="@+id/etCatraca1"
+                android:layout_marginLeft="20sp"
+                />
+
+            <TextView
+                android:id="@+id/tvSinalIgual01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/etCatraca1"
+                android:layout_alignTop="@+id/etCatraca1"
+                android:layout_alignBottom="@+id/etCatraca1"
+                android:layout_toRightOf="@+id/etCatraca2"
+                android:layout_marginLeft="6sp"
+                android:text="="
+                android:textSize="30sp"
+                android:textColor="@color/marrom"
+                android:textStyle="bold"
+                android:paddingLeft="10sp"
+                android:paddingRight="10sp"
+                />
+
+            <EditText
+                android:id="@+id/etCatracaTotal"
+                style="@style/catraca"
+                android:layout_alignBaseline="@+id/etCatraca1"
+                android:layout_toRightOf="@+id/tvSinalIgual01"
+                android:layout_marginLeft="6sp"
+                android:text="00"
+                android:focusable="false"
+                />
+
+
+        </RelativeLayout>
+
         <Button
             android:id="@+id/btnChegar"
             style="@style/button"

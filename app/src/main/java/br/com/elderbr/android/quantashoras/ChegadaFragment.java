@@ -18,7 +18,9 @@ public class ChegadaFragment extends Fragment {
     private View view;
     private Context myContext;
 
-    private EditText etTpSaida, etTpPercurso, etTpChegada, etTpPrevisaoSaida, etTsSaida, etTsPercurso, etTsChegada, etTsPrevisaoSaida;
+    private EditText etTpSaida, etTpPercurso, etTpChegada, etTpPrevisaoSaida,
+            etTsSaida, etTsPercurso, etTsChegada, etTsPrevisaoSaida,
+            etCatraca1, etCatraca2, etCatracaTotal;
     private Button btnCalcular;
 
     private ChegadaController controller;
@@ -78,6 +80,23 @@ public class ChegadaFragment extends Fragment {
             }
         });
 
+
+        /** CATRACA **/
+        etCatraca1.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                controller.calcularCatraca(etCatraca1, etCatraca2, etCatracaTotal);
+                return false;
+            }
+        });
+        etCatraca2.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                controller.calcularCatraca(etCatraca1, etCatraca2, etCatracaTotal);
+                return false;
+            }
+        });
+
         btnCalcular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,6 +124,11 @@ public class ChegadaFragment extends Fragment {
         etTsPercurso = view.findViewById(R.id.etTsPercurso);
         etTsChegada = view.findViewById(R.id.etTsChegada);
         etTsPrevisaoSaida = view.findViewById(R.id.etTsPrevisaoSaida);
+
+        // Catraca
+        etCatraca1 = view.findViewById(R.id.etCatraca1);
+        etCatraca2 = view.findViewById(R.id.etCatraca2);
+        etCatracaTotal = view.findViewById(R.id.etCatracaTotal);
 
         // Botão Calcular
         btnCalcular = view.findViewById(R.id.btnChegar);

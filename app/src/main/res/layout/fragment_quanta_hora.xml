@@ -175,7 +175,10 @@
                 android:id="@+id/etTotalSoma01"
                 style="@style/hora"
                 android:layout_below="@+id/tvTotalSoma01"
-                android:layout_alignLeft="@+id/tvTotalSoma01" />
+                android:layout_alignLeft="@+id/tvTotalSoma01"
+                android:text="00:00"
+                android:focusable="false"
+                />
 
 
         </RelativeLayout>
@@ -252,7 +255,10 @@
                 android:id="@+id/etTotalSubtrair01"
                 style="@style/hora"
                 android:layout_below="@+id/tvTotalSubtrair01"
-                android:layout_alignLeft="@+id/tvTotalSubtrair01" />
+                android:layout_alignLeft="@+id/tvTotalSubtrair01"
+                android:focusable="false"
+                android:text="00:00"
+                />
         </RelativeLayout>
 
         <Button
