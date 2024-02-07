@@ -261,13 +261,29 @@
                 />
         </RelativeLayout>
 
-        <Button
-            android:id="@+id/btnTrabalhada"
-            style="@style/button"
-            android:text="Calcular"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="20dp"
-            />
+            android:layout_centerHorizontal="true"
+            >
+            <Button
+                android:id="@+id/btnTrabalhada"
+                style="@style/button"
+                android:layout_weight="1"
+                android:text="Calcular"
+                />
+
+            <Button
+                android:id="@+id/btnLimpar"
+                style="@style/button"
+                android:layout_weight="1"
+                android:text="LIMPAR"
+                />
+        </LinearLayout>
+
 
     </RelativeLayout>
 

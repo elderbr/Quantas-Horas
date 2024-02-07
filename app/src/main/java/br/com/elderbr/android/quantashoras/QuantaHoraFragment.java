@@ -18,7 +18,7 @@ public class QuantaHoraFragment extends Fragment {
     private EditText etEntrada, etSaida, etTempo, etHora, etDevendo, etFechamento,
             etSoma1, etSoma2, etSomaTotal,
             etSubtrair1, etSubtrair2, etSutrairTotal;
-    private Button btnCalcular;
+    private Button btnCalcular, btnLimpar;
 
     private QuantaHoraController quantaHoraController;
 
@@ -45,6 +45,7 @@ public class QuantaHoraFragment extends Fragment {
         etSutrairTotal = view.findViewById(R.id.etTotalSubtrair01);
 
         btnCalcular = view.findViewById(R.id.btnTrabalhada);
+        btnLimpar = view.findViewById(R.id.btnLimpar);
 
         quantaHoraController = new QuantaHoraController(inflater.getContext());
 
@@ -101,6 +102,14 @@ public class QuantaHoraFragment extends Fragment {
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
                 quantaHoraController.subtrair(etSubtrair1, etSubtrair2, etSutrairTotal);
                 return false;
+            }
+        });
+
+        btnLimpar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                quantaHoraController.limpar(etEntrada, etSaida, etTempo, etHora, etDevendo, etFechamento,
+                        etSoma1, etSoma2, etSomaTotal, etSubtrair1, etSubtrair2, etSutrairTotal);
             }
         });
 

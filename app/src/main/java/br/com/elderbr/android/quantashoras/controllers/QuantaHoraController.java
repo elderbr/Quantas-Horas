@@ -81,12 +81,14 @@ public class QuantaHoraController {
             if (trabalhada.getDoubleHora() > hrMaxima.getDoubleHora()) {
 
                 hrDevendo = new Hora(trabalhada);
-                hrFechamento.setHora(trabalhada);
 
                 // Calculando quantidade horas devendo
                 hrDevendo.subtrair(hrMaxima);
                 etDevendo.setText(hrDevendo.toHoras());
 
+                // calculando a hora do fechamento quando passar da hora máxima
+                hrFechamento.setHora(hrSaida);
+                hrFechamento.somar(hrTempo);
                 hrFechamento.subtrair(hrDevendo);
                 etFechamento.setText(hrFechamento.toHoras());
 
@@ -100,6 +102,30 @@ public class QuantaHoraController {
             Msg.Erro("Erro ao calcular horas trabalhadas: " + e.getMessage());
         }
 
+    }
+
+    public void limpar(EditText etEntrada, EditText etSaida, EditText etTempo, EditText etHora, EditText etDevendo, EditText etFechamento,
+                       EditText etSoma1, EditText etSoma2, EditText etSomaTotal,
+                       EditText etSubtrair1, EditText etSubtrair2, EditText etSubtrairTotal) {
+        etEntrada.setText("");
+        etSaida.setText("");
+        etTempo.setText("00:00");
+        etHora.setText("00:00");
+        etDevendo.setText("00:00");
+        etFechamento.setText("00:00");
+
+        // EditText que soma
+        etSoma1.setText("");
+        etSoma2.setText("");
+        etSomaTotal.setText("00:00");
+
+        // EditText que subtrai
+        etSubtrair1.setText("");
+        etSubtrair2.setText("");
+        etSubtrairTotal.setText("00:00");
+
+        // Da foco do EditText entrada
+        etEntrada.requestFocus();
     }
 
     public void btnCalcular(EditText etEntrada, EditText etSaida, EditText etTempo, EditText etHora, EditText etDevendo, EditText etFechamento) {
