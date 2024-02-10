@@ -10,14 +10,13 @@ import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
 
-import br.com.elderbr.android.quantashoras.controllers.HoraController;
 import br.com.elderbr.android.quantashoras.controllers.QuantaHoraController;
 
 public class QuantaHoraFragment extends Fragment {
     private View view;
     private EditText etEntrada, etSaida, etTempo,
             etHora, etExtra, etNoturno,
-            etDevendo, etFechamento,
+            etSobrando, etFechamento,
             etSoma1, etSoma2, etSomaTotal,
             etSubtrair1, etSubtrair2, etSutrairTotal;
     private Button btnCalcular, btnLimpar;
@@ -29,36 +28,14 @@ public class QuantaHoraFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_quanta_hora, container, false);
 
-        etEntrada = view.findViewById(R.id.etEntrada);
-        etSaida = view.findViewById(R.id.etSaida);
-        etTempo = view.findViewById(R.id.etTempo);
-
-        etHora = view.findViewById(R.id.etHoraTrabalhada);
-        etExtra = view.findViewById(R.id.etExtra);
-        etNoturno = view.findViewById(R.id.etNoturno);
-
-        etDevendo = view.findViewById(R.id.etDevendo);
-        etFechamento = view.findViewById(R.id.etFechamento);
-
-        // Somar hora
-        etSoma1 = view.findViewById(R.id.etHoraSoma01);
-        etSoma2 = view.findViewById(R.id.etHoraSoma02);
-        etSomaTotal = view.findViewById(R.id.etTotalSoma01);
-
-        // Subtrair hora
-        etSubtrair1 = view.findViewById(R.id.etHoraSubtrair01);
-        etSubtrair2 = view.findViewById(R.id.etHoraSubtrair02);
-        etSutrairTotal = view.findViewById(R.id.etTotalSubtrair01);
-
-        btnCalcular = view.findViewById(R.id.btnTrabalhada);
-        btnLimpar = view.findViewById(R.id.btnLimpar);
+        init();
 
         quantaHoraController = new QuantaHoraController(inflater.getContext());
 
         etEntrada.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                quantaHoraController.calcular(etEntrada, etSaida, etTempo, etHora, etExtra, etNoturno, etDevendo, etFechamento);
+                quantaHoraController.calcular(etEntrada, etSaida, etTempo, etHora, etExtra, etNoturno, etSobrando, etFechamento);
                 return false;
             }
         });
@@ -66,7 +43,7 @@ public class QuantaHoraFragment extends Fragment {
         etSaida.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                quantaHoraController.calcular(etEntrada, etSaida, etTempo, etHora, etExtra, etNoturno, etDevendo, etFechamento);
+                quantaHoraController.calcular(etEntrada, etSaida, etTempo, etHora, etExtra, etNoturno, etSobrando, etFechamento);
                 return false;
             }
         });
@@ -74,8 +51,15 @@ public class QuantaHoraFragment extends Fragment {
         etTempo.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                quantaHoraController.calcular(etEntrada, etSaida, etTempo, etHora, etExtra, etNoturno, etDevendo, etFechamento);
+                quantaHoraController.calcular(etEntrada, etSaida, etTempo, etHora, etExtra, etNoturno, etSobrando, etFechamento);
                 return false;
+            }
+        });
+
+        etTempo.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                etTempo.selectAll();
             }
         });
 
@@ -114,7 +98,7 @@ public class QuantaHoraFragment extends Fragment {
         btnLimpar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                quantaHoraController.limpar(etEntrada, etSaida, etTempo, etHora, etDevendo, etFechamento,
+                quantaHoraController.limpar(etEntrada, etSaida, etTempo, etHora, etSobrando, etFechamento,
                         etSoma1, etSoma2, etSomaTotal, etSubtrair1, etSubtrair2, etSutrairTotal);
             }
         });
@@ -122,11 +106,41 @@ public class QuantaHoraFragment extends Fragment {
         btnCalcular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                quantaHoraController.btnCalcular(etEntrada, etSaida, etTempo, etHora, etDevendo, etFechamento);
+                quantaHoraController.btnCalcular(etEntrada, etSaida, etTempo, etHora, etSobrando, etFechamento);
             }
         });
 
 
         return view;
+    }
+
+    private void init(){
+        etEntrada = view.findViewById(R.id.etEntrada);
+        etEntrada.requestFocus();
+
+        etSaida = view.findViewById(R.id.etSaida);
+        etTempo = view.findViewById(R.id.etTempo);
+
+        etHora = view.findViewById(R.id.etHoraTrabalhada);
+        etExtra = view.findViewById(R.id.etExtra);
+        etNoturno = view.findViewById(R.id.etNoturno);
+
+        etSobrando = view.findViewById(R.id.etSobrando);
+        etFechamento = view.findViewById(R.id.etFechamento);
+
+        // Somar hora
+        etSoma1 = view.findViewById(R.id.etHoraSoma01);
+        etSoma2 = view.findViewById(R.id.etHoraSoma02);
+        etSomaTotal = view.findViewById(R.id.etTotalSoma01);
+
+        // Subtrair hora
+        etSubtrair1 = view.findViewById(R.id.etHoraSubtrair01);
+        etSubtrair2 = view.findViewById(R.id.etHoraSubtrair02);
+        etSutrairTotal = view.findViewById(R.id.etTotalSubtrair01);
+
+        btnCalcular = view.findViewById(R.id.btnTrabalhada);
+        btnLimpar = view.findViewById(R.id.btnLimpar);
+
+
     }
 }

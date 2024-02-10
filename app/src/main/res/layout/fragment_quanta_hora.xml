@@ -25,7 +25,10 @@
             android:id="@+id/etEntrada"
             style="@style/hora"
             android:layout_below="@+id/tvEntrada"
-            android:layout_alignLeft="@+id/tvEntrada" />
+            android:layout_alignLeft="@+id/tvEntrada"
+            android:nextFocusForward="@id/etSaida"
+            android:imeOptions="actionNext"
+            />
 
         <TextView
             android:id="@+id/tvSaida"
@@ -33,13 +36,17 @@
             android:layout_alignBaseline="@+id/tvEntrada"
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@+id/etEntrada"
-            android:text="@string/saida" />
+            android:text="@string/saida"
+            />
 
         <EditText
             android:id="@+id/etSaida"
             style="@style/hora"
             android:layout_below="@+id/tvSaida"
-            android:layout_alignLeft="@+id/tvSaida" />
+            android:layout_alignLeft="@+id/tvSaida"
+            android:nextFocusForward="@id/etTempo"
+            android:imeOptions="actionNext"
+            />
 
         <TextView
             android:id="@+id/tvTempo"
@@ -54,7 +61,10 @@
             style="@style/hora"
             android:layout_below="@+id/tvTempo"
             android:layout_alignLeft="@+id/tvTempo"
-            android:text="00:00" />
+            android:text="00:00"
+            android:nextFocusForward="@id/btnTrabalhada"
+            android:imeOptions="actionDone"
+            />
 
         <TextView
             android:id="@+id/tvHoraTrabalhada"
@@ -113,28 +123,28 @@
             />
 
         <TextView
-            android:id="@+id/tvDevendo"
+            android:id="@+id/tvSobrando"
             style="@style/text"
             android:minWidth="80sp"
             android:layout_below="@+id/etHoraTrabalhada"
             android:layout_alignLeft="@+id/tvEntrada"
             android:layout_marginTop="20sp"
-            android:text="@string/devendo" />
+            android:text="@string/sobrando" />
 
         <EditText
-            android:id="@+id/etDevendo"
+            android:id="@+id/etSobrando"
             style="@style/hora"
-            android:layout_below="@+id/tvDevendo"
-            android:layout_alignLeft="@+id/tvDevendo"
+            android:layout_below="@+id/tvSobrando"
+            android:layout_alignLeft="@+id/tvSobrando"
             android:focusable="false"
             android:text="00:00" />
 
         <TextView
             android:id="@+id/tvFechamento"
             style="@style/text"
-            android:layout_alignBaseline="@+id/tvDevendo"
+            android:layout_alignBaseline="@+id/tvSobrando"
             android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@+id/etDevendo"
+            android:layout_toRightOf="@+id/etSobrando"
             android:text="@string/fechamento" />
 
         <EditText
@@ -149,7 +159,7 @@
             android:id="@+id/layout_somar_hora"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/etDevendo"
+            android:layout_below="@+id/etSobrando"
             android:layout_marginTop="20dp"
             android:background="@color/marrom"
             android:padding="20sp">
@@ -164,7 +174,10 @@
             <EditText
                 android:id="@+id/etHoraSoma01"
                 style="@style/hora"
-                android:layout_below="@+id/tvHoraSoma01" />
+                android:layout_below="@+id/tvHoraSoma01"
+                android:nextFocusForward="@id/etHoraSoma02"
+                android:imeOptions="actionNext"
+                />
 
             <TextView
                 android:id="@+id/tvSinalSoma01"
@@ -192,7 +205,9 @@
                 android:id="@+id/etHoraSoma02"
                 style="@style/hora"
                 android:layout_below="@+id/tvHoraSoma02"
-                android:layout_alignLeft="@+id/tvHoraSoma02" />
+                android:layout_alignLeft="@+id/tvHoraSoma02"
+                android:imeOptions="actionDone"
+                />
 
             <TextView
                 android:id="@+id/tvSinalIgual01"
@@ -247,7 +262,10 @@
             <EditText
                 android:id="@+id/etHoraSubtrair01"
                 style="@style/hora"
-                android:layout_below="@+id/tvHoraSubtrair01" />
+                android:layout_below="@+id/tvHoraSubtrair01"
+                android:imeOptions="actionNext"
+                android:nextFocusForward="@id/etHoraSubtrair02"
+                />
 
             <TextView
                 android:id="@+id/tvSinalSubtrair01"
@@ -275,7 +293,9 @@
                 android:id="@+id/etHoraSubtrair02"
                 style="@style/hora"
                 android:layout_below="@+id/tvHoraSubtrair02"
-                android:layout_alignLeft="@+id/tvHoraSubtrair02" />
+                android:layout_alignLeft="@+id/tvHoraSubtrair02"
+                android:imeOptions="actionDone"
+                />
 
             <TextView
                 android:id="@+id/tvSinalIgual02"

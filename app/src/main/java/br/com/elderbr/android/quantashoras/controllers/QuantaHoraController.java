@@ -18,7 +18,7 @@ public class QuantaHoraController {
     private Hora hrHora = new Hora(0, 0);
     private Hora hrExtra = new Hora(0, 0);
     private Hora hrNoturno = new Hora(0, 0);
-    private Hora hrDevendo = new Hora(0, 0);
+    private Hora hrSobrando = new Hora(0, 0);
     private Hora hrFechamento = new Hora(0, 0);
     private Hora hrNormal = new Hora(0, 0);
     private Hora hrMaxima = new Hora(0, 0);
@@ -43,18 +43,18 @@ public class QuantaHoraController {
 
             // Pegando a entrada
             hrEntrada = new Hora(0, 0);
-            if (entrada.isBlank() || !entrada.contains(":")) {
+            if (entrada.isBlank() || !entrada.contains(":") || entrada.split(":").length < 2) {
                 hrEntrada.setHora(0, 0);
-                setEdits(etHora, etDevendo, etFechamento);
+                setEdits(etHora, etExtra, etNoturno, etDevendo, etFechamento);
                 return;
             }
             hrEntrada.setHora(entrada);
 
             // Pegando a saída
             hrSaida = new Hora(0, 0);
-            if (saida.isBlank() || !saida.contains(":")) {
+            if (saida.isBlank() || !saida.contains(":") || saida.split(":").length < 2) {
                 hrSaida.setHora(0, 0);
-                setEdits(etHora, etDevendo, etFechamento);
+                setEdits(etHora, etExtra, etNoturno, etDevendo, etFechamento);
                 return;
             }
             hrSaida.setHora(saida);
@@ -80,7 +80,7 @@ public class QuantaHoraController {
             noturno(etNoturno);
 
             // Calculando horas na casa
-            setDevendo(etDevendo);
+            sobrando(etDevendo);
 
 
         } catch (Exception e) {
@@ -151,13 +151,13 @@ public class QuantaHoraController {
         etNoturno.setText(hrNoturno.toHoras());
     }
 
-    private void setDevendo(EditText etDevendo) {
-        hrDevendo = new Hora(0, 0);
+    private void sobrando(EditText etDevendo) {
+        hrSobrando = new Hora(0, 0);
         if (hrHora.getDoubleHora() > hrMaxima.getDoubleHora()) {
-            hrDevendo = new Hora(hrHora);
-            hrDevendo.subtrair(hrMaxima);
+            hrSobrando = new Hora(hrHora);
+            hrSobrando.subtrair(hrMaxima);
         }
-        etDevendo.setText(hrDevendo.toHoras());
+        etDevendo.setText(hrSobrando.toHoras());
     }
 
     public void limpar(EditText etEntrada, EditText etSaida, EditText etTempo, EditText etHora, EditText etDevendo, EditText etFechamento,
@@ -272,8 +272,10 @@ public class QuantaHoraController {
     }
 
 
-    private void setEdits(EditText etHora, EditText etDevendo, EditText etFechamento) {
+    private void setEdits(EditText etHora, EditText etExtra, EditText etNoturno, EditText etDevendo, EditText etFechamento) {
         etHora.setText("00:00");
+        etExtra.setText("00:00");
+        etNoturno.setText("00:00");
         etDevendo.setText("00:00");
         etFechamento.setText("00:00");
     }

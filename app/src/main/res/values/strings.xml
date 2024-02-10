@@ -16,6 +16,6 @@
     <string name="saida">Saída</string>
     <string name="tempo">Tempo</string>
     <string name="hora_trabalhada">Horas</string>
-    <string name="devendo">Devendo</string>
+    <string name="sobrando">Sobrando</string>
     <string name="fechamento">Fechamento</string>
 </resources>
