@@ -18,7 +18,8 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:text="@string/entrada" />
+            android:text="@string/entrada"
+            />
 
         <EditText
             android:id="@+id/etEntrada"
@@ -61,7 +62,9 @@
             android:layout_below="@+id/etEntrada"
             android:layout_alignLeft="@+id/tvEntrada"
             android:layout_marginTop="20dp"
-            android:text="@string/hora_trabalhada" />
+            android:text="@string/hora_trabalhada"
+            android:minWidth="80sp"
+            />
 
         <EditText
             android:id="@+id/etHoraTrabalhada"
@@ -71,12 +74,51 @@
             android:focusable="false"
             android:text="00:00" />
 
+        <!-- Extra -->
+        <TextView
+            android:id="@+id/tvExtra"
+            android:layout_alignBaseline="@+id/tvHoraTrabalhada"
+            android:layout_toRightOf="@+id/etHoraTrabalhada"
+            android:layout_marginLeft="20sp"
+            style="@style/text"
+            android:text="Extra"
+            android:minWidth="80sp"
+            />
+        <EditText
+            android:id="@+id/etExtra"
+            android:layout_below="@+id/tvExtra"
+            android:layout_alignLeft="@+id/tvExtra"
+            style="@style/hora"
+            android:text="00:00"
+            android:focusable="false"
+            />
+
+        <!-- Adicional Noturno -->
+        <TextView
+            android:id="@+id/tvNoturno"
+            android:text="Noturno"
+            style="@style/text"
+            android:layout_alignBaseline="@+id/tvHoraTrabalhada"
+            android:layout_toRightOf="@+id/etExtra"
+            android:layout_marginLeft="20sp"
+            android:minWidth="80sp"
+            />
+        <EditText
+            android:id="@+id/etNoturno"
+            style="@style/hora"
+            android:text="00:00"
+            android:layout_below="@+id/tvNoturno"
+            android:layout_alignLeft="@+id/tvNoturno"
+            android:focusable="false"
+            />
+
         <TextView
             android:id="@+id/tvDevendo"
             style="@style/text"
-            android:layout_alignBaseline="@+id/tvHoraTrabalhada"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@+id/etHoraTrabalhada"
+            android:minWidth="80sp"
+            android:layout_below="@+id/etHoraTrabalhada"
+            android:layout_alignLeft="@+id/tvEntrada"
+            android:layout_marginTop="20sp"
             android:text="@string/devendo" />
 
         <EditText
@@ -90,7 +132,7 @@
         <TextView
             android:id="@+id/tvFechamento"
             style="@style/text"
-            android:layout_alignBaseline="@+id/tvHoraTrabalhada"
+            android:layout_alignBaseline="@+id/tvDevendo"
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@+id/etDevendo"
             android:text="@string/fechamento" />
@@ -107,7 +149,7 @@
             android:id="@+id/layout_somar_hora"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/etFechamento"
+            android:layout_below="@+id/etDevendo"
             android:layout_marginTop="20dp"
             android:background="@color/marrom"
             android:padding="20sp">
@@ -115,6 +157,7 @@
             <TextView
                 android:id="@+id/tvHoraSoma01"
                 style="@style/text"
+                android:minWidth="80sp"
                 android:text="Hora 1"
                 android:textColor="@color/white" />
 
@@ -138,6 +181,7 @@
             <TextView
                 android:id="@+id/tvHoraSoma02"
                 style="@style/text"
+                android:minWidth="80sp"
                 android:layout_alignBaseline="@+id/tvHoraSoma01"
                 android:layout_marginLeft="4sp"
                 android:layout_toRightOf="@+id/tvSinalSoma01"
@@ -165,6 +209,7 @@
             <TextView
                 android:id="@+id/tvTotalSoma01"
                 style="@style/text"
+                android:minWidth="80sp"
                 android:layout_alignBaseline="@+id/tvHoraSoma01"
                 android:layout_marginLeft="4sp"
                 android:layout_toRightOf="@+id/tvSinalIgual01"
@@ -195,6 +240,7 @@
             <TextView
                 android:id="@+id/tvHoraSubtrair01"
                 style="@style/text"
+                android:minWidth="80sp"
                 android:text="Hora 1"
                 android:textColor="@color/white" />
 
@@ -218,6 +264,7 @@
             <TextView
                 android:id="@+id/tvHoraSubtrair02"
                 style="@style/text"
+                android:minWidth="80sp"
                 android:layout_alignBaseline="@+id/tvHoraSubtrair01"
                 android:layout_marginLeft="4sp"
                 android:layout_toRightOf="@+id/tvSinalSubtrair01"
@@ -245,6 +292,7 @@
             <TextView
                 android:id="@+id/tvTotalSubtrair01"
                 style="@style/text"
+                android:minWidth="80sp"
                 android:layout_alignBaseline="@+id/tvHoraSubtrair01"
                 android:layout_marginLeft="4sp"
                 android:layout_toRightOf="@+id/tvSinalIgual02"

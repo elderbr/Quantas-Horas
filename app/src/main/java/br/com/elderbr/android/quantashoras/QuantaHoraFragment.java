@@ -15,7 +15,9 @@ import br.com.elderbr.android.quantashoras.controllers.QuantaHoraController;
 
 public class QuantaHoraFragment extends Fragment {
     private View view;
-    private EditText etEntrada, etSaida, etTempo, etHora, etDevendo, etFechamento,
+    private EditText etEntrada, etSaida, etTempo,
+            etHora, etExtra, etNoturno,
+            etDevendo, etFechamento,
             etSoma1, etSoma2, etSomaTotal,
             etSubtrair1, etSubtrair2, etSutrairTotal;
     private Button btnCalcular, btnLimpar;
@@ -30,7 +32,11 @@ public class QuantaHoraFragment extends Fragment {
         etEntrada = view.findViewById(R.id.etEntrada);
         etSaida = view.findViewById(R.id.etSaida);
         etTempo = view.findViewById(R.id.etTempo);
+
         etHora = view.findViewById(R.id.etHoraTrabalhada);
+        etExtra = view.findViewById(R.id.etExtra);
+        etNoturno = view.findViewById(R.id.etNoturno);
+
         etDevendo = view.findViewById(R.id.etDevendo);
         etFechamento = view.findViewById(R.id.etFechamento);
 
@@ -52,7 +58,7 @@ public class QuantaHoraFragment extends Fragment {
         etEntrada.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                quantaHoraController.calcular(etEntrada, etSaida, etTempo, etHora, etDevendo, etFechamento);
+                quantaHoraController.calcular(etEntrada, etSaida, etTempo, etHora, etExtra, etNoturno, etDevendo, etFechamento);
                 return false;
             }
         });
@@ -60,7 +66,7 @@ public class QuantaHoraFragment extends Fragment {
         etSaida.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                quantaHoraController.calcular(etEntrada, etSaida, etTempo, etHora, etDevendo, etFechamento);
+                quantaHoraController.calcular(etEntrada, etSaida, etTempo, etHora, etExtra, etNoturno, etDevendo, etFechamento);
                 return false;
             }
         });
@@ -68,7 +74,7 @@ public class QuantaHoraFragment extends Fragment {
         etTempo.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                quantaHoraController.calcular(etEntrada, etSaida, etTempo, etHora, etDevendo, etFechamento);
+                quantaHoraController.calcular(etEntrada, etSaida, etTempo, etHora, etExtra, etNoturno, etDevendo, etFechamento);
                 return false;
             }
         });
