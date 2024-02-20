@@ -70,10 +70,10 @@ public class QuantaHoraController {
             }
 
             // Calculando o fechamento
-            fechamento(etFechamento);
+            fechamento();
 
             // Calculando as horas trabalhadas
-            trabalhada(etHora);
+            trabalhada();
 
             // Calculando a hora extra
             extra(etExtra);
@@ -84,6 +84,9 @@ public class QuantaHoraController {
             // Calculando horas na casa
             sobrando(etDevendo);
 
+            etFechamento.setText(hrFechamento.toHoras());
+            etHora.setText(hrHora.toHoras());
+
 
         } catch (Exception e) {
             Msg.Erro("Erro ao calcular horas trabalhadas: " + e.getMessage());
@@ -91,23 +94,22 @@ public class QuantaHoraController {
 
     }
 
-    private void fechamento(EditText etFechamento) {
+    private void fechamento() {
         hrFechamento = new Hora(hrSaida);
         hrFechamento.somar(hrTempo);
         if (hrEntrada.getDoubleHora() > hrFechamento.getDoubleHora()) {
             hrFechamento.addDia(1);
         }
-        etFechamento.setText(hrFechamento.toHoras());
     }
 
-    private void trabalhada(EditText etTrabalhada) {
+    private void trabalhada() {
         hrHora = new Hora(hrFechamento);
-        if (hrEntrada.getDoubleHora() > hrFechamento.getDoubleHora()) {
-            hrHora.addDia(1);
-            hrFechamento.addDia(1);
-        }
         hrHora.subtrair(hrEntrada);
-        etTrabalhada.setText(hrHora.toHoras());
+        if(hrHora.getDoubleHora()>hrMaxima.getDoubleHora()){
+            Hora dif = new Hora(hrFechamento);
+            dif.subtrair(hrMaxima);
+            hrFechamento.subtrair(dif);
+        }
     }
 
     private void extra(EditText etExtra) {
