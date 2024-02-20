@@ -247,6 +247,14 @@ public class Hora {
         return this;
     }
 
+    public Long time(){
+        return data.getTime().getTime();
+    }
+
+    public Calendar getCalendar(){
+        return data;
+    }
+
     public ContentValues getValues() {
         values.put(getClass().getSimpleName().toLowerCase(), toHoras());
         return values;

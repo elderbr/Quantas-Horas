@@ -3,6 +3,8 @@ package br.com.elderbr.android.quantashoras.controllers;
 import android.content.Context;
 import android.widget.EditText;
 
+import java.time.LocalTime;
+
 import br.com.elderbr.android.quantashoras.Conexao;
 import br.com.elderbr.android.quantashoras.models.Hora;
 import br.com.elderbr.android.quantashoras.models.Horario;
@@ -102,6 +104,7 @@ public class QuantaHoraController {
         hrHora = new Hora(hrFechamento);
         if (hrEntrada.getDoubleHora() > hrFechamento.getDoubleHora()) {
             hrHora.addDia(1);
+            hrFechamento.addDia(1);
         }
         hrHora.subtrair(hrEntrada);
         etTrabalhada.setText(hrHora.toHoras());
@@ -117,35 +120,42 @@ public class QuantaHoraController {
     }
 
     private void noturno(EditText etNoturno) {
-
-
         hrNoturno = new Hora(0, 0);
-        if (hrEntrada.getDoubleHora() < 5) {
-            if (hrFechamento.getDoubleHora() > 4.59) {
+        if (hrEntrada.getDiaAno() != hrFechamento.getDiaAno()) {
+            if (hrFechamento.getDoubleHora() >= 5) {
                 hrNoturno.setHora(5, 0);
             } else {
                 hrNoturno.setHora(hrFechamento);
             }
-            hrNoturno.subtrair(hrEntrada);
-        }
-
-        if (hrEntrada.getDoubleHora() > 4.59 && hrEntrada.getDoubleHora() < 22) {
-            if (hrFechamento.getDoubleHora() > 4.59 && hrFechamento.getDoubleHora() < 22) {
-                hrNoturno.setHora(5, 0);
+            if (hrEntrada.getDoubleHora() >= 22) {
+                hrNoturno.subtrair(hrEntrada);
             } else {
-                hrNoturno = new Hora(hrFechamento);
+                hrNoturno.subtrair(22, 0);
             }
-            hrNoturno.subtrair(22, 0);
-        }
-
-        if (hrEntrada.getDoubleHora() > 21.59) {
-            if (hrFechamento.getDoubleHora() < 5 || hrFechamento.getDoubleHora() > 21.59) {
-                hrNoturno.setHora(hrFechamento);
+        } else {
+            if (hrEntrada.getDoubleHora() >= 22) {
+                if (hrFechamento.getDoubleHora() >= 22 || hrFechamento.getDoubleHora() <= 5) {
+                    hrNoturno.setHora(hrFechamento);
+                    hrNoturno.subtrair(hrEntrada);
+                } else if (hrFechamento.getDoubleHora() >= 22 || hrFechamento.getDoubleHora() >= 5) {
+                    hrNoturno.setHora(5,0);
+                    hrNoturno.subtrair(hrEntrada);
+                }
             }
-            if (hrFechamento.getDoubleHora() > 4.59 && hrFechamento.getDoubleHora() < 22) {
-                hrNoturno.setHora(5, 0);
+            if(hrEntrada.getDoubleHora()<=5){
+                if(hrFechamento.getDoubleHora()<=5){
+                    hrNoturno.setHora(hrFechamento);
+                    hrNoturno.subtrair(hrEntrada);
+                }else{
+                    hrNoturno.setHora(5,0);
+                    hrNoturno.subtrair(hrEntrada);
+                }
+            }else{
+                if(hrFechamento.getDoubleHora()>=22){
+                    hrNoturno.setHora(hrFechamento);
+                    hrNoturno.subtrair(22,0);
+                }
             }
-            hrNoturno.subtrair(hrEntrada);
         }
         // Exibir resultado no EditText
         etNoturno.setText(hrNoturno.toHoras());
