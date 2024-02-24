@@ -22,8 +22,11 @@ public class QuantaHoraController {
     private Hora hrNoturno = new Hora(0, 0);
     private Hora hrSobrando = new Hora(0, 0);
     private Hora hrFechamento = new Hora(0, 0);
-    private Hora hrNormal = new Hora(0, 0);
-    private Hora hrMaxima = new Hora(0, 0);
+    private Hora hrNormal = new Hora(7, 50);
+    private Hora hrMaxima = new Hora(10, 50);
+
+    public QuantaHoraController() {
+    }
 
     public QuantaHoraController(Context context) {
         conexao = new Conexao(context);
@@ -32,6 +35,46 @@ public class QuantaHoraController {
         hrNormal = horario.getJornada();
         hrMaxima = horario.getHoraMaxima();
 
+    }
+
+    public Hora getHora() {
+        return hrHora;
+    }
+
+    public String toHora() {
+        return hrHora.toHoras();
+    }
+
+    public Hora getExtra() {
+        return hrExtra;
+    }
+
+    public String toExtra() {
+        return hrExtra.toHoras();
+    }
+
+    public Hora getNoturno() {
+        return hrNoturno;
+    }
+
+    public String toNoturno() {
+        return hrNoturno.toHoras();
+    }
+
+    public Hora getSobrando() {
+        return hrSobrando;
+    }
+
+    public String toSobrando() {
+        return hrSobrando.toHoras();
+    }
+
+    public Hora getFechamento() {
+        return hrFechamento;
+    }
+
+    public String toFechamento() {
+        return hrFechamento.toHoras();
     }
 
     public void calcular(EditText etEntrada, EditText etSaida, EditText etTempo,
@@ -71,27 +114,48 @@ public class QuantaHoraController {
 
             // Calculando o fechamento
             fechamento();
-
             // Calculando as horas trabalhadas
             trabalhada();
-
             // Calculando a hora extra
-            extra(etExtra);
-
+            extra();
             // Calculando o adicional noturno
-            noturno(etNoturno);
-
+            noturno();
             // Calculando horas na casa
-            sobrando(etDevendo);
+            sobrando();
 
             etFechamento.setText(hrFechamento.toHoras());
             etHora.setText(hrHora.toHoras());
+            etExtra.setText(hrExtra.toHoras());
+            etNoturno.setText(hrNoturno.toHoras());
+            etDevendo.setText(hrSobrando.toHoras());
 
 
         } catch (Exception e) {
             Msg.Erro("Erro ao calcular horas trabalhadas: " + e.getMessage());
         }
 
+    }
+
+    public void calcular(Hora entrada, Hora saida, Hora tempo) {
+
+        hrEntrada = new Hora(entrada);
+        hrSaida = new Hora(saida);
+        hrTempo = new Hora(tempo);
+
+        // Calculando o fechamento
+        fechamento();
+
+        // Calculando as horas trabalhadas
+        trabalhada();
+
+        // Calculando a hora extra
+        extra();
+
+        // Calculando o adicional noturno
+        noturno();
+
+        // Calculando horas na casa
+        sobrando();
     }
 
     private void fechamento() {
@@ -105,71 +169,70 @@ public class QuantaHoraController {
     private void trabalhada() {
         hrHora = new Hora(hrFechamento);
         hrHora.subtrair(hrEntrada);
-        if(hrHora.getDoubleHora()>hrMaxima.getDoubleHora()){
-            Hora dif = new Hora(hrFechamento);
-            dif.subtrair(hrMaxima);
-            hrFechamento.subtrair(dif);
+        if (hrHora.getDoubleHora() > hrMaxima.getDoubleHora()) {
+            sobrando();
+            hrFechamento.subtrair(hrSobrando);
         }
     }
 
-    private void extra(EditText etExtra) {
+    private void extra() {
         hrExtra = new Hora(0, 0);
         if (hrHora.getDoubleHora() > hrNormal.getDoubleHora()) {
             hrExtra = new Hora(hrHora);
             hrExtra.subtrair(hrNormal);
         }
-        etExtra.setText(hrExtra.toHoras());
     }
 
-    private void noturno(EditText etNoturno) {
+    private void noturno() {
+
+        Hora fechamento = new Hora(hrSaida);
+        fechamento.somar(hrTempo);
+        if (hrEntrada.getDoubleHora() > fechamento.getDoubleHora()) {
+            fechamento.addDia(1);
+        }
+
         hrNoturno = new Hora(0, 0);
-        if (hrEntrada.getDiaAno() != hrFechamento.getDiaAno()) {
-            if (hrFechamento.getDoubleHora() >= 5) {
+
+        // Entrada maior que 22
+        if (hrEntrada.getDoubleHora() >= 22) {
+            if (fechamento.getDoubleHora() >= 22 || fechamento.getDoubleHora() <= 5) {
+                hrNoturno.setHora(fechamento);
+            } else {
+                hrNoturno.setHora("05:00");
+            }
+            hrNoturno.subtrair(hrEntrada);
+            return;
+        }
+
+        // Entrada menor ou igual a 5
+        if (hrEntrada.getDoubleHora() <= 5) {
+            if (fechamento.getDoubleHora() >= 5) {
                 hrNoturno.setHora(5, 0);
             } else {
-                hrNoturno.setHora(hrFechamento);
+                hrNoturno.setHora(fechamento);
             }
-            if (hrEntrada.getDoubleHora() >= 22) {
-                hrNoturno.subtrair(hrEntrada);
-            } else {
+            hrNoturno.subtrair(hrEntrada);
+            return;
+        }
+        if (hrEntrada.getDoubleHora() > 5 && hrEntrada.getDoubleHora() <= 22) {
+            if (fechamento.getDoubleHora() >= 22 || fechamento.getDoubleHora() <= 5) {
+                hrNoturno.setHora(fechamento);
                 hrNoturno.subtrair(22, 0);
+                return;
             }
-        } else {
-            if (hrEntrada.getDoubleHora() >= 22) {
-                if (hrFechamento.getDoubleHora() >= 22 || hrFechamento.getDoubleHora() <= 5) {
-                    hrNoturno.setHora(hrFechamento);
-                    hrNoturno.subtrair(hrEntrada);
-                } else if (hrFechamento.getDoubleHora() >= 22 || hrFechamento.getDoubleHora() >= 5) {
-                    hrNoturno.setHora(5,0);
-                    hrNoturno.subtrair(hrEntrada);
-                }
-            }
-            if(hrEntrada.getDoubleHora()<=5){
-                if(hrFechamento.getDoubleHora()<=5){
-                    hrNoturno.setHora(hrFechamento);
-                    hrNoturno.subtrair(hrEntrada);
-                }else{
-                    hrNoturno.setHora(5,0);
-                    hrNoturno.subtrair(hrEntrada);
-                }
-            }else{
-                if(hrFechamento.getDoubleHora()>=22){
-                    hrNoturno.setHora(hrFechamento);
-                    hrNoturno.subtrair(22,0);
-                }
+            if (fechamento.getDoubleHora() >= 5) {
+                hrNoturno = new Hora(7,0);
             }
         }
-        // Exibir resultado no EditText
-        etNoturno.setText(hrNoturno.toHoras());
+
     }
 
-    private void sobrando(EditText etDevendo) {
+    private void sobrando() {
         hrSobrando = new Hora(0, 0);
         if (hrHora.getDoubleHora() > hrMaxima.getDoubleHora()) {
             hrSobrando = new Hora(hrHora);
             hrSobrando.subtrair(hrMaxima);
         }
-        etDevendo.setText(hrSobrando.toHoras());
     }
 
     public void limpar(EditText etEntrada, EditText etSaida, EditText etTempo, EditText etHora, EditText etDevendo, EditText etFechamento,
