@@ -64,6 +64,7 @@ public class Hora {
     }
 
     public Hora(Hora horas) {
+        data.set(Calendar.DAY_OF_YEAR, horas.getDiaAno());
         data.set(Calendar.HOUR_OF_DAY, horas.getHora());
         data.set(Calendar.MINUTE, horas.getMinutos());
     }
@@ -239,7 +240,7 @@ public class Hora {
     }
 
     public String toDia() {
-        return "" + data.get(Calendar.DAY_OF_MONTH);
+        return String.valueOf(data.get(Calendar.DAY_OF_YEAR));
     }
 
     public Hora addDia(int dia) {
