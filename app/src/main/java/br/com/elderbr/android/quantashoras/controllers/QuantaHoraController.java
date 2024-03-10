@@ -88,7 +88,7 @@ public class QuantaHoraController {
 
             // Pegando a entrada
             hrEntrada = new Hora(0, 0);
-            if (entrada.isBlank() || !entrada.contains(":") || entrada.split(":").length < 2) {
+            if (entrada.isBlank() || !entrada.contains(":") || entrada.split(":").length < 2 && entrada.length() >= 4) {
                 hrEntrada.setHora(0, 0);
                 setEdits(etHora, etExtra, etNoturno, etDevendo, etFechamento);
                 return;
@@ -97,7 +97,7 @@ public class QuantaHoraController {
 
             // Pegando a saída
             hrSaida = new Hora(0, 0);
-            if (saida.isBlank() || !saida.contains(":") || saida.split(":").length < 2) {
+            if (saida.isBlank() || !saida.contains(":") || saida.split(":").length < 2 && saida.length() >= 4) {
                 hrSaida.setHora(0, 0);
                 setEdits(etHora, etExtra, etNoturno, etDevendo, etFechamento);
                 return;
@@ -185,46 +185,42 @@ public class QuantaHoraController {
 
     private void noturno() {
 
+        hrNoturno =new Hora(0,0);
         Hora fechamento = new Hora(hrSaida);
         fechamento.somar(hrTempo);
-        if (hrEntrada.getDoubleHora() > fechamento.getDoubleHora()) {
-            fechamento.addDia(1);
+        if(fechamento.getDoubleHora()<hrEntrada.getDoubleHora()){
+            fechamento.addDia(2);
         }
 
-        hrNoturno = new Hora(0, 0);
 
-        // Entrada maior que 22
-        if (hrEntrada.getDoubleHora() >= 22) {
-            if (fechamento.getDoubleHora() >= 22 || fechamento.getDoubleHora() <= 5) {
-                hrNoturno.setHora(fechamento);
-            } else {
-                hrNoturno.setHora("05:00");
+        if(hrEntrada.getDiaAno() < fechamento.getDiaAno()){
+            // ENTRADA MAIOR QUE 22 HORAS
+            if(hrEntrada.getDoubleHora()>=22){
+                // FECHAMENTO FOR MENOR OU IGUAL A 4 HORAS
+                if(fechamento.getDoubleHora()<=5){
+                    hrNoturno.setHora(fechamento);
+                }else{
+                    hrNoturno.setHora(5,0);
+                }
+                hrNoturno.subtrair(hrEntrada);
+            }else{
+                if(fechamento.getDoubleHora()<=5){
+                    hrNoturno.setHora(fechamento);
+                }else{
+                    hrNoturno.setHora(5,0);
+                }
+                hrNoturno.subtrair(22,0);
             }
-            hrNoturno.subtrair(hrEntrada);
-            return;
-        }
-
-        // Entrada menor ou igual a 5
-        if (hrEntrada.getDoubleHora() <= 5) {
-            if (fechamento.getDoubleHora() >= 5) {
-                hrNoturno.setHora(5, 0);
-            } else {
-                hrNoturno.setHora(fechamento);
-            }
-            hrNoturno.subtrair(hrEntrada);
-            return;
-        }
-        if (hrEntrada.getDoubleHora() > 5 && hrEntrada.getDoubleHora() <= 22) {
-            if (fechamento.getDoubleHora() >= 22 || fechamento.getDoubleHora() <= 5) {
-                hrNoturno.setHora(fechamento);
-                hrNoturno.subtrair(22, 0);
-                return;
-            }
-            if (fechamento.getDoubleHora() >= 5) {
-                hrNoturno = new Hora(7,0);
+        }else{
+            if(hrEntrada.getDoubleHora()<5){
+                if(fechamento.getDoubleHora()<=5){
+                    hrNoturno = new Hora(fechamento);
+                }else{
+                    hrNoturno.setHora(5,0);
+                }
+                hrNoturno.subtrair(hrEntrada);
             }
         }
-
     }
 
     private void sobrando() {
@@ -235,13 +231,17 @@ public class QuantaHoraController {
         }
     }
 
-    public void limpar(EditText etEntrada, EditText etSaida, EditText etTempo, EditText etHora, EditText etDevendo, EditText etFechamento,
+    public void limpar(EditText etEntrada, EditText etSaida, EditText etTempo,
+                       EditText etHora, EditText etExtra, EditText etNoturno,
+                       EditText etDevendo, EditText etFechamento,
                        EditText etSoma1, EditText etSoma2, EditText etSomaTotal,
                        EditText etSubtrair1, EditText etSubtrair2, EditText etSubtrairTotal) {
         etEntrada.setText("");
         etSaida.setText("");
         etTempo.setText("00:00");
         etHora.setText("00:00");
+        etExtra.setText("00:00");
+        etNoturno.setText("00:00");
         etDevendo.setText("00:00");
         etFechamento.setText("00:00");
 
