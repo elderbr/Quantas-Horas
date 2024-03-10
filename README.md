@@ -1,8 +1,9 @@
 # Quantas Horas
 
-Quantas Horas faz o calculo das horas trabalhadas.
-Configure a hora normal para calcular as horas extras.
-Configure a hora máxima para calcular as horas a mais devendo.
+Gerenciar seu tempo de trabalho nunca foi tão fácil! Com o 'Quantas Horas', você tem ao alcance dos dedos uma ferramenta poderosa que simplifica como você calcula sua jornada diária, horas extras e adicional noturno, tudo isso sem comprometer seus dados pessoais.
+Projetado com simplicidade e eficiência em mente, o 'Quantas Horas' é ideal para o controle do tempo de trabalho.
+
+[![VÍDEO TUTORIAL]("https://github.com/elderbr/assets/blob/main/quantashoras/cel_quantasHoras_01.png?raw=true"),("https://youtu.be/gu37Xr_FAGo?si=3kgjOiZPYq50V5pF")]
 
 <div>
 <h2>Tela Quantas Horas</h2>
