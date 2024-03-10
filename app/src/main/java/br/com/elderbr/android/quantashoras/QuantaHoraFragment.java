@@ -98,7 +98,7 @@ public class QuantaHoraFragment extends Fragment {
         btnLimpar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                quantaHoraController.limpar(etEntrada, etSaida, etTempo, etHora, etSobrando, etFechamento,
+                quantaHoraController.limpar(etEntrada, etSaida, etTempo, etHora, etExtra, etNoturno, etSobrando, etFechamento,
                         etSoma1, etSoma2, etSomaTotal, etSubtrair1, etSubtrair2, etSutrairTotal);
             }
         });
